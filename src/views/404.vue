@@ -27,7 +27,7 @@ export default {
   setup () {
     const counter = ref(0)
     const message = computed(() => {
-      return counter.value++
+      return counter.value + 1
     })
     return {
       counter,
