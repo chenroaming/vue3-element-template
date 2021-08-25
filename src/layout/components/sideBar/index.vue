@@ -8,53 +8,13 @@
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
-      background-color="#545c64"
+      background-color="#002142"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-submenu index="1">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template #title>分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template #title>选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <template #title>导航二</template>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <template #title>导航三</template>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <template #title>导航四</template>
-      </el-menu-item>
-      <el-submenu index="5">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template #title>分组一</template>
-          <el-menu-item index="5-1">选项1</el-menu-item>
-          <el-menu-item index="5-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="5-3">选项3</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
+      <sideItem
+        v-for="item in filterRouter"
+        :key="item.meta.title"
+        :item="item"></sideItem>
     </el-menu>
   </div>
 </template>
@@ -62,8 +22,12 @@
 <script>
 import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import sideItem from './sideItem'
 export default defineComponent({
   name: 'sideBar',
+  components: {
+    sideItem
+  },
   setup () {
     console.log('children Created')
     onMounted(() => {
@@ -77,10 +41,12 @@ export default defineComponent({
       console.log(key, keyPath)
     }
     const isCollapse = computed(() => store.getters['app/isCollapse'])
+    const filterRouter = computed(() => store.getters['app/asyncRouter'])
     return {
       handleOpen,
       handleClose,
-      isCollapse
+      isCollapse,
+      filterRouter
     }
   }
 })
@@ -96,12 +62,12 @@ export default defineComponent({
 <style scoped lang = "scss">
   .aside {
     height: 100vh;
-    background: #545c64;
+    background: #002142;
   }
   .logo {
     width: 100%;
     height: 60px;
-    background: #545c64;
+    background: #002142;
     line-height: 60px;
     text-align: center;
     color: #fff;

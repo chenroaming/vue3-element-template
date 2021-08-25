@@ -1,7 +1,9 @@
+import { asyncRoutes } from '@/router'
 const app = {
   namespaced: true,
   state: () => ({
-    isCollapse: false
+    isCollapse: false,
+    asyncRouter: asyncRoutes
   }),
   mutations: {
     setCollapse (state) {
@@ -16,6 +18,9 @@ const app = {
   getters: {
     isCollapse: (state) => {
       return state.isCollapse
+    },
+    asyncRouter: (state) => {
+      return state.asyncRouter.filter(item => !item.hide)
     }
   }
 }

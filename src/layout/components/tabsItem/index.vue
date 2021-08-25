@@ -26,7 +26,6 @@ export default {
 
 <style scoped lang = "scss">
   .tabs {
-    width: 100%;
     height: 35px;
     border-bottom: 1px solid #d8dce5;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
