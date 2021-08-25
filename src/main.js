@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 // 按需引入element组件库
 import installElementPlus from './libs/element'
+import 'element-plus/dist/index.css'
+// 如果要使用.scss样式文件，则需要引入base.scss文件
+// import 'element-plus/packages/theme-chalk/src/base.scss'
 // 创建vue3应用实例
 const app = createApp(App)
 // 引入vuex

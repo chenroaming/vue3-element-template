@@ -1,5 +1,3 @@
-// 如果要使用.scss样式文件，则需要引入base.scss文件
-// import 'element-plus/packages/theme-chalk/src/base.scss'
 // 按需引入，这里是全部引入，如果有不需要引入的组件自行删除即可，可减少打包体积
 import {
   ElAlert,
@@ -65,7 +63,6 @@ import {
   ElSlider,
   ElStep,
   ElSteps,
-  ElSubmenu,
   ElSwitch,
   ElTabPane,
   ElTable,
@@ -151,7 +148,6 @@ export default app => {
   app.use(ElSlider)
   app.use(ElStep)
   app.use(ElSteps)
-  app.use(ElSubmenu)
   app.use(ElSwitch)
   app.use(ElTabPane)
   app.use(ElTable)
