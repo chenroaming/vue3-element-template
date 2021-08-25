@@ -4,6 +4,7 @@
     <div class="main">
       <Nav></Nav>
       <div class="app-main">
+        <TabsItem></TabsItem>
         <router-view/>
       </div>
     </div>
@@ -13,11 +14,20 @@
 <script>
 import Nav from './components/nav'
 import SideBar from './components/sideBar'
+import TabsItem from './components/tabsItem'
+import { onMounted } from 'vue'
 export default {
   name: 'Layout',
   components: {
     Nav,
-    SideBar
+    SideBar,
+    TabsItem
+  },
+  setup () {
+    console.log('fatherCreated')
+    onMounted(() => {
+      console.log('father Mounted')
+    })
   }
 }
 </script>
@@ -28,7 +38,7 @@ export default {
     width: 100%;
     height: 100%;
     .main {
-      width: calc(100vw - 200px);
+      width: 100%;
       height: 100vh;
     }
     .app-main {

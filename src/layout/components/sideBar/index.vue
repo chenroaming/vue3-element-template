@@ -2,7 +2,7 @@
   <div class="aside">
    <div class="logo">Logo</div>
    <el-menu
-      :uniqueOpened="true"
+      uniqueOpened
       default-active="2"
       class="el-menu-vertical-demo"
       @open="handleOpen"
@@ -60,17 +60,23 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'sideBar',
   setup () {
+    console.log('children Created')
+    onMounted(() => {
+      console.log('children Mounted')
+    })
+    const store = useStore()
     const handleOpen = (key, keyPath) => {
       console.log(key, keyPath)
     }
     const handleClose = (key, keyPath) => {
       console.log(key, keyPath)
     }
-    const isCollapse = false
+    const isCollapse = computed(() => store.getters['app/isCollapse'])
     return {
       handleOpen,
       handleClose,
@@ -81,21 +87,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  /* 解决菜单栏样式问题 */
-  :deep(.el-menu-vertical-demo) {
-    min-width: 201px !important;
+  /* 收缩菜单样式 */
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
   }
 </style>
 
 <style scoped lang = "scss">
-  $sideBarWidth: 198px;
   .aside {
-    width: 200px;
     height: 100vh;
     background: #545c64;
-    & .el-submenu .el-menu-item {
-      min-width: $sideBarWidth !important;
-    }
   }
   .logo {
     width: 100%;

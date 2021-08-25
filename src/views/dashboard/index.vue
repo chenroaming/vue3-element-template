@@ -1,7 +1,6 @@
 <template>
  <div class="">
    {{ msg }}
-   <el-button type="primary">element按钮</el-button>
  </div>
 </template>
 
