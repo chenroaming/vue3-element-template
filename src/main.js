@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import './router/permission' // 引入路由控制
 import store from './store'
 // 按需引入element组件库
 import installElementPlus from './libs/element'
