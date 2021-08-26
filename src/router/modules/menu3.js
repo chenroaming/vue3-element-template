@@ -14,6 +14,7 @@ export default {
   children: [
     {
       path: '/menu3/index',
+      component: () => import('@/views/menu3'),
       meta: {
         title: '菜单三子菜单1',
         roles: ['admin']
@@ -22,6 +23,7 @@ export default {
     },
     {
       path: '/menu3/child1',
+      component: () => import('@/views/menu3/child'),
       meta: {
         title: '菜单三子菜单2',
         roles: ['admin']

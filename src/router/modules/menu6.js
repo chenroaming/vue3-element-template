@@ -14,6 +14,7 @@ export default {
   children: [
     {
       path: '/menu6/index',
+      component: () => import('@/views/menu6/child1/index'),
       meta: {
         title: '菜单六子菜单1',
         roles: ['admin']
@@ -23,6 +24,7 @@ export default {
       children: [
         {
           path: '/menu6/index',
+          component: () => import('@/views/menu6/child1/child1'),
           meta: {
             title: '菜单六第三级菜单1',
             roles: ['admin']
@@ -31,6 +33,7 @@ export default {
         },
         {
           path: '/menu6/child2',
+          component: () => import('@/views/menu6/child1/child2'),
           meta: {
             title: '菜单六第三级菜单2',
             roles: ['admin']

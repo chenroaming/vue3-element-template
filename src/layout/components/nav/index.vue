@@ -42,7 +42,7 @@ export default defineComponent({
   .header {
     width: 100%;
     height: 60px;
-    background: #002142;
+    background: #304156;
     .firstLevel-menu {
       display: flex;
       margin: 0;
@@ -67,7 +67,7 @@ export default defineComponent({
           width: 30px;
           display: inline-block;
           height: 2px;
-          background: #409EFF;
+          background: #304156;
           transition: opacity .3s;
         }
       }

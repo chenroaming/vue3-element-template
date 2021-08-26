@@ -4,6 +4,9 @@
     <div class="main">
       <Nav></Nav>
       <div class="app-main">
+        <div class="app-main-header">
+          <BreadCrumb></BreadCrumb>
+        </div>
         <TabsItem></TabsItem>
         <router-view/>
       </div>
@@ -15,13 +18,15 @@
 import Nav from './components/nav'
 import SideBar from './components/sideBar'
 import TabsItem from './components/tabsItem'
+import BreadCrumb from './components/breadCrumb'
 import { onMounted } from 'vue'
 export default {
   name: 'Layout',
   components: {
     Nav,
     SideBar,
-    TabsItem
+    TabsItem,
+    BreadCrumb
   },
   setup () {
     console.log('fatherCreated')
@@ -44,6 +49,14 @@ export default {
     .app-main {
       width: 100%;
       height: calc(100vh - 60px);
+      &-header {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        width: 100%;
+        height: 50px;
+        box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+      }
     }
   }
 </style>

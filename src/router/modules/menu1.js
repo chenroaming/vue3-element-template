@@ -1,4 +1,4 @@
-// 首页
+// 示例菜单1
 import Layout from '@/layout'
 export default {
   path: '/menu1',
@@ -14,6 +14,7 @@ export default {
   children: [
     {
       path: 'index',
+      component: () => import('@/views/menu1'),
       meta: {
         title: '菜单一子菜单1',
         roles: ['admin']

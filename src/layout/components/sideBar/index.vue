@@ -8,9 +8,9 @@
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
-      background-color="#002142"
+      background-color="#304156"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#409EFF">
       <sideItem
         v-for="item in filterRouter"
         :key="item.meta.title"
@@ -62,12 +62,12 @@ export default defineComponent({
 <style scoped lang = "scss">
   .aside {
     height: 100vh;
-    background: #002142;
+    background: #304156;
   }
   .logo {
     width: 100%;
     height: 60px;
-    background: #002142;
+    background: #304156;
     line-height: 60px;
     text-align: center;
     color: #fff;

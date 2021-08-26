@@ -14,6 +14,7 @@ export default {
   children: [
     {
       path: 'index',
+      component: () => import('@/views/menu2'),
       meta: {
         title: '菜单二子菜单2',
         roles: ['admin']
