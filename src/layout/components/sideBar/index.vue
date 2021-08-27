@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import sideItem from './sideItem'
@@ -32,21 +32,17 @@ export default defineComponent({
   },
   setup () {
     const store = useStore()
-    const { matched, path } = useRoute()
+    const { matched } = useRoute()
     const isCollapse = computed(() => store.getters['app/isCollapse'])
     const filterRouter = computed(() => store.getters['app/asyncRouter'])
-    if (matched.length >= 2) {
-      console.log(last(matched).path)
-    }
-    const nowActive = computed(() => {
+    const nowActive = ref('')
+    onMounted(() => {
       const [head] = matched
-      if (head.children.length < 2) {
-        return head.path
+      if (head.children.length < 2 && matched.length < 3) {
+        nowActive.value = head.path
+        return
       }
-      if (matched.length >= 2) {
-        return last(matched).path
-      }
-      return path
+      nowActive.value = last(matched).path
     })
     return {
       isCollapse,
