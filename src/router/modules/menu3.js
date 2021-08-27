@@ -4,7 +4,7 @@ export default {
   path: '/menu3',
   component: Layout,
   name: 'menu3',
-  redirect: '/menu3/index',
+  redirect: '/menu3/child1',
   meta: {
     title: '菜单三',
     icon: 'el-icon-phone',
@@ -13,7 +13,7 @@ export default {
   isCollapse: true,
   children: [
     {
-      path: '/menu3/index',
+      path: '/menu3/child1',
       component: () => import('@/views/menu3'),
       meta: {
         title: '菜单三子菜单1',
@@ -22,7 +22,7 @@ export default {
       name: 'child3-1'
     },
     {
-      path: '/menu3/child1',
+      path: '/menu3/child2',
       component: () => import('@/views/menu3/child'),
       meta: {
         title: '菜单三子菜单2',

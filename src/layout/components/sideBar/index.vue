@@ -1,52 +1,57 @@
 <template>
   <div class="aside">
-   <div class="logo">Logo</div>
-   <el-menu
-      uniqueOpened
-      default-active="2"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      :collapse="isCollapse"
-      background-color="#304156"
-      text-color="#fff"
-      active-text-color="#409EFF">
-      <sideItem
-        v-for="item in filterRouter"
-        :key="item.meta.title"
-        :item="item"></sideItem>
-    </el-menu>
+    <div class="logo">Logo</div>
+    <el-scrollbar class="scrollbar-wrapper">
+      <el-menu
+        router
+        :default-active="nowActive"
+        class="el-menu-vertical-demo"
+        :collapse="isCollapse"
+        background-color="#304156"
+        text-color="#fff"
+        active-text-color="#409EFF">
+        <sideItem
+          v-for="item in filterRouter"
+          :key="item.meta.title"
+          :item="item"></sideItem>
+      </el-menu>
+    </el-scrollbar>
   </div>
 </template>
 
 <script>
-import { defineComponent, computed, onMounted } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 import sideItem from './sideItem'
+import { last } from 'lodash'
 export default defineComponent({
   name: 'sideBar',
   components: {
     sideItem
   },
   setup () {
-    console.log('children Created')
-    onMounted(() => {
-      console.log('children Mounted')
-    })
     const store = useStore()
-    const handleOpen = (key, keyPath) => {
-      console.log(key, keyPath)
-    }
-    const handleClose = (key, keyPath) => {
-      console.log(key, keyPath)
-    }
+    const { matched, path } = useRoute()
     const isCollapse = computed(() => store.getters['app/isCollapse'])
     const filterRouter = computed(() => store.getters['app/asyncRouter'])
+    if (matched.length >= 2) {
+      console.log(last(matched).path)
+    }
+    const nowActive = computed(() => {
+      const [head] = matched
+      if (head.children.length < 2) {
+        return head.path
+      }
+      if (matched.length >= 2) {
+        return last(matched).path
+      }
+      return path
+    })
     return {
-      handleOpen,
-      handleClose,
       isCollapse,
-      filterRouter
+      filterRouter,
+      nowActive
     }
   }
 })
@@ -56,6 +61,10 @@ export default defineComponent({
   /* 收缩菜单样式 */
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
+  }
+  /* 菜单高度固定便于出现滚动条 */
+  .scrollbar-wrapper {
+    height: calc(100% - 60px);
   }
 </style>
 

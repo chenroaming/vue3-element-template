@@ -8,7 +8,7 @@
 import { ref } from 'vue'
 export default {
   setup () {
-    const title = ref('这是菜单5子菜单1')
+    const title = ref('这是菜单5子菜单2')
     return {
       title
     }

@@ -10,7 +10,7 @@ export default {
     {
       path: 'dashboard',
       name: 'Dashboard1',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/dashboard'),
       meta: { title: '首页' }
     }
   ]

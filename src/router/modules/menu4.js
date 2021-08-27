@@ -13,13 +13,13 @@ export default {
   isCollapse: false,
   children: [
     {
-      path: '/menu4/index',
+      path: 'index',
       component: () => import('@/views/menu4'),
       meta: {
         title: '菜单四子菜单1',
         roles: ['admin']
       },
-      name: 'child4'
+      name: 'child4-1'
     }
   ]
 }

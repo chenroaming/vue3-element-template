@@ -4,7 +4,7 @@ export default {
   path: '/menu2',
   component: Layout,
   name: 'menu2',
-  redirect: '/menu2/index',
+  redirect: '/menu2/child1',
   meta: {
     title: '菜单二',
     icon: 'el-icon-user',
@@ -13,13 +13,13 @@ export default {
   isCollapse: false,
   children: [
     {
-      path: 'index',
+      path: 'child1',
       component: () => import('@/views/menu2'),
       meta: {
         title: '菜单二子菜单2',
         roles: ['admin']
       },
-      name: 'child2'
+      name: 'child2-1'
     }
   ]
 }

@@ -23,7 +23,7 @@ export default {
       name: 'child6-1',
       children: [
         {
-          path: '/menu6/index',
+          path: '/menu6/index/child1',
           component: () => import('@/views/menu6/child1/child1'),
           meta: {
             title: '菜单六第三级菜单1',
@@ -32,7 +32,7 @@ export default {
           name: 'child6-1-1'
         },
         {
-          path: '/menu6/child2',
+          path: '/menu6/index/child2',
           component: () => import('@/views/menu6/child1/child2'),
           meta: {
             title: '菜单六第三级菜单2',
