@@ -2,7 +2,7 @@
   <div class="m-page">
     <SideBar></SideBar>
     <div class="main">
-      <Nav></Nav>
+      <NavBar></NavBar>
       <div class="app-main">
         <div class="app-main-header">
           <BreadCrumb></BreadCrumb>
@@ -15,14 +15,14 @@
 </template>
 
 <script>
-import Nav from './components/nav'
+import NavBar from './components/nav'
 import SideBar from './components/sideBar'
 import TabsItem from './components/tabsItem'
 import BreadCrumb from './components/breadCrumb'
 export default {
   name: 'Layout',
   components: {
-    Nav,
+    NavBar,
     SideBar,
     TabsItem,
     BreadCrumb

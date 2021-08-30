@@ -12,7 +12,7 @@
 <script>
 import { defineComponent, reactive } from 'vue'
 export default defineComponent({
-  name: 'nav',
+  name: 'NavBar',
   setup () {
     const noShow = true
     const data = reactive({ currentMenu: 'fir' })
