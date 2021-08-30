@@ -1,76 +1,56 @@
 <template>
   <div v-if="noShow" class="header">
-    <ul class="firstLevel-menu">
-      <li v-for="item in menuList" :key="item.name" @click="go(item)">
-        <span :style="{ color: setColor(item.name) }">{{ item.title }}</span>
-        <span :style="{ opacity: setOpacity(item.name) }"></span>
-      </li>
-    </ul>
+    <el-menu
+      :default-active="nowActive"
+      @select="handleSelect"
+      class="el-menu-demo"
+      mode="horizontal"
+      background-color="#304156"
+      text-color="#fff"
+      active-text-color="#409EFF"
+    >
+      <el-menu-item
+        v-for="item in firstMenu"
+        :key="item.name"
+        :index="item.path"
+        >{{ item.meta.title }}</el-menu-item
+      >
+    </el-menu>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'NavBar',
   setup () {
+    const store = useStore()
     const noShow = true
-    const data = reactive({ currentMenu: 'fir' })
-    const menuList = [
-      { name: 'fir', title: '首页' },
-      { name: 'sec', title: '菜单11111' },
-      { name: 'tri', title: '菜单22222' }
-    ]
-    const go = item => {
-      data.currentMenu = item.name
+    const nowActive = computed(() => {
+      const [{ path }] = useRoute().matched
+      return path
+    })
+    store.dispatch('app/setSecondMenus', [nowActive.value])
+    const firstMenu = computed(() => store.getters['app/asyncRouter'])
+    const handleSelect = (key, keyPath, item) => {
+      store.dispatch('app/setSecondMenus', keyPath)
     }
-    const setOpacity = name => { return data.currentMenu === name ? '1' : '0' }
-    const setColor = name => { return data.currentMenu === name ? '#409EFF' : '#fff' }
     return {
       noShow,
-      menuList,
-      go,
-      data,
-      setOpacity,
-      setColor
+      nowActive,
+      handleSelect,
+      firstMenu
     }
   }
 })
 </script>
 
-<style scoped lang = "scss">
-  .header {
-    width: 100%;
-    height: 60px;
-    background: #304156;
-    .firstLevel-menu {
-      display: flex;
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-      li {
-        max-width: 80px;
-        margin: 0 10px;
-        height: 60px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        font-size: 14px;
-        cursor: pointer;
-        color: #fff;
-        span:nth-child(1) {
-          display: inline-block;
-          transition: color .3s;
-        }
-        span:nth-child(2) {
-          width: 30px;
-          display: inline-block;
-          height: 2px;
-          background: #304156;
-          transition: opacity .3s;
-        }
-      }
-    }
-  }
+<style scoped lang="scss">
+.header {
+  width: 100%;
+  height: 60px;
+  background: #304156;
+}
 </style>

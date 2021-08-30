@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { defineComponent, computed, onMounted, ref } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import sideItem from './sideItem'
-import { last } from 'lodash'
+// import { last } from 'lodash'
 export default defineComponent({
   name: 'sideBar',
   components: {
@@ -32,18 +32,24 @@ export default defineComponent({
   },
   setup () {
     const store = useStore()
-    const { matched } = useRoute()
+    // const { matched, path } = useRoute()
+    const { path } = useRoute()
     const isCollapse = computed(() => store.getters['app/isCollapse'])
-    const filterRouter = computed(() => store.getters['app/asyncRouter'])
+    const filterRouter = computed(() => store.getters['app/secondMenus'])
     const nowActive = ref('')
-    onMounted(() => {
-      const [head] = matched
-      if (head.children.length < 2 && matched.length < 3) {
-        nowActive.value = head.path
-        return
-      }
-      nowActive.value = last(matched).path
-    })
+    // const setNowActive = () => {
+    //   const [head] = matched
+    //   if (head.children.length < 2 && matched.length < 3) {
+    //     nowActive.value = head.path
+    //     return
+    //   }
+    //   nowActive.value = last(matched).path
+    // }
+    const setSecondMenusActive = () => {
+      nowActive.value = path
+    }
+    // setNowActive()
+    setSecondMenusActive()
     return {
       isCollapse,
       filterRouter,

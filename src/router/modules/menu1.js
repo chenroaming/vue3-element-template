@@ -13,7 +13,7 @@ export default {
   isCollapse: false,
   children: [
     {
-      path: 'child1',
+      path: '/menu1/child1',
       component: () => import('@/views/menu1'),
       meta: {
         title: '菜单一',

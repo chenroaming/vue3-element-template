@@ -8,7 +8,7 @@ export default {
   meta: { title: '首页' },
   children: [
     {
-      path: 'dashboard',
+      path: '/dashboard',
       name: 'Dashboard1',
       component: () => import('@/views/dashboard'),
       meta: { title: '首页' }

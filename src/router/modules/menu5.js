@@ -22,7 +22,7 @@ export default {
       name: 'child5-1'
     },
     {
-      path: 'child1',
+      path: '/menu5/child1',
       component: () => import('@/views/menu5/child1'),
       meta: {
         title: '菜单五子菜单2',

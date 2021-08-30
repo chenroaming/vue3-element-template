@@ -1,26 +1,40 @@
 import { asyncRoutes } from '@/router'
+import { toRaw } from 'vue'
 const app = {
   namespaced: true,
   state: () => ({
     isCollapse: false,
-    asyncRouter: asyncRoutes
+    asyncRouter: asyncRoutes,
+    secondMenus: []
   }),
   mutations: {
     setCollapse (state) {
       state.isCollapse = !state.isCollapse
+    },
+    setSecondMenus (state, secMenus) {
+      state.secondMenus = secMenus
     }
   },
   actions: {
-    changeCollapse ({ state, commit, rootState }) {
+    changeCollapse ({ commit }) {
       commit('setCollapse')
+    },
+    setSecondMenus: ({ state, commit }, [path]) => {
+      const { children } = toRaw(state.asyncRouter).find(item => {
+        return item.path === path
+      })
+      commit('setSecondMenus', children)
     }
   },
   getters: {
-    isCollapse: (state) => {
+    isCollapse: state => {
       return state.isCollapse
     },
-    asyncRouter: (state) => {
+    asyncRouter: state => {
       return state.asyncRouter.filter(item => !item.hide)
+    },
+    secondMenus: state => {
+      return state.secondMenus
     }
   }
 }
