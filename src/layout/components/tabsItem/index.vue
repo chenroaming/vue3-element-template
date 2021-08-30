@@ -1,6 +1,15 @@
 <template>
  <div class="tabs">
    <el-button type="text" @click="collaspse">{{ status }}</el-button>
+   <div class="tabs-container">
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+    <el-check-tag checked size="mini">菜单1</el-check-tag>
+   </div>
  </div>
 </template>
 
@@ -31,5 +40,9 @@ export default {
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
     display: flex;
     padding: 0 10px;
+    align-items: center;
+    &-container {
+      padding: 0 10px;
+    }
   }
 </style>

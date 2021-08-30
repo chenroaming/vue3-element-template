@@ -68,6 +68,7 @@ import {
   ElTable,
   ElTableColumn,
   ElTabs,
+  ElCheckTag,
   ElTag,
   ElTimePicker,
   ElTimeSelect,
@@ -153,6 +154,7 @@ export default app => {
   app.use(ElTable)
   app.use(ElTableColumn)
   app.use(ElTabs)
+  app.use(ElCheckTag)
   app.use(ElTag)
   app.use(ElTimePicker)
   app.use(ElTimeSelect)
