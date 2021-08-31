@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 export default defineComponent({
@@ -28,8 +28,9 @@ export default defineComponent({
   setup () {
     const store = useStore()
     const noShow = true
+    const $route = useRoute()
     const nowActive = computed(() => {
-      const [{ path }] = useRoute().matched
+      const [{ path }] = $route.matched
       return path
     })
     store.dispatch('app/setSecondMenus', [nowActive.value])
@@ -37,6 +38,9 @@ export default defineComponent({
     const handleSelect = (key, keyPath, item) => {
       store.dispatch('app/setSecondMenus', keyPath)
     }
+    watch($route, ({ matched: [{ path }] }) => {
+      handleSelect('', [path])
+    })
     return {
       noShow,
       nowActive,

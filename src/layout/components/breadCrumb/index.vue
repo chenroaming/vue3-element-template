@@ -11,9 +11,12 @@
 <script>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+import { last } from 'lodash'
 export default {
   setup () {
     const $router = useRoute()
+    const { dispatch } = useStore()
     const menuList = ref([])
     const getBreadCrumb = (menu) => {
       // const { meta: { title }, path } = menu
@@ -24,10 +27,11 @@ export default {
       //   [{ title, path }]
       // )
       menuList.value = fullPath
+      dispatch('app/addTabsMenus', last($router.matched))
     }
     getBreadCrumb($router.matched)
-    console.log($router.matched)
     watch($router, (cur) => {
+      dispatch('app/addTabsMenus', last(cur.matched))
       getBreadCrumb(cur.matched)
     })
     return {

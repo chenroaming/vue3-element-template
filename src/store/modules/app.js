@@ -5,7 +5,8 @@ const app = {
   state: () => ({
     isCollapse: false,
     asyncRouter: asyncRoutes,
-    secondMenus: []
+    secondMenus: [],
+    tabsMenus: []
   }),
   mutations: {
     setCollapse (state) {
@@ -13,6 +14,12 @@ const app = {
     },
     setSecondMenus (state, secMenus) {
       state.secondMenus = secMenus
+    },
+    addTabsMenus (state, menu) {
+      state.tabsMenus.push(menu)
+    },
+    subTabsMenus (state, path) {
+      state.tabsMenus = toRaw(state.tabsMenus).filter(item => item.path !== path)
     }
   },
   actions: {
@@ -24,6 +31,12 @@ const app = {
         return item.path === path
       })
       commit('setSecondMenus', children)
+    },
+    addTabsMenus ({ state, commit }, menu) {
+      const hasMenu = state.tabsMenus.some(item => item.path === menu.path)
+      if (!hasMenu) {
+        commit('addTabsMenus', menu)
+      }
     }
   },
   getters: {
