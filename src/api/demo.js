@@ -2,7 +2,7 @@
  * 示例接口
  */
 
-import { generate } from '@/utils/request'
+import { generate } from '@/libs/axios'
 const config = {
   items: [
     // 加载广告位列表
