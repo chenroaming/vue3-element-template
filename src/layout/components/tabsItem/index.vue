@@ -21,6 +21,7 @@
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { last } from 'lodash'
 export default {
   setup () {
     const { getters, state, dispatch, commit } = useStore()
@@ -47,7 +48,8 @@ export default {
     const handleClose = itemPath => {
       commit('app/subTabsMenus', itemPath)
       if (itemPath === $route.path) {
-        $router.go(-1)
+        const { path } = last(tabsMenus.value)
+        $router.replace(path)
       }
     }
     return {

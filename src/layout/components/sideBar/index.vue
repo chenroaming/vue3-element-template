@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import sideItem from './sideItem'
@@ -33,10 +33,10 @@ export default defineComponent({
   setup () {
     const store = useStore()
     // const { matched, path } = useRoute()
-    const { path } = useRoute()
+    const $route = useRoute()
     const isCollapse = computed(() => store.getters['app/isCollapse'])
     const filterRouter = computed(() => store.getters['app/secondMenus'])
-    const nowActive = ref('')
+    // const nowActive = ref('')
     // const setNowActive = () => {
     //   const [head] = matched
     //   if (head.children.length < 2 && matched.length < 3) {
@@ -45,11 +45,14 @@ export default defineComponent({
     //   }
     //   nowActive.value = last(matched).path
     // }
-    const setSecondMenusActive = () => {
-      nowActive.value = path
-    }
+    // const setSecondMenusActive = () => {
+    //   nowActive.value = path
+    // }
+    const nowActive = computed(() => {
+      return $route.path
+    })
     // setNowActive()
-    setSecondMenusActive()
+    // setSecondMenusActive()
     return {
       isCollapse,
       filterRouter,
