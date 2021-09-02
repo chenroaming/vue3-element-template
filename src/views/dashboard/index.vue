@@ -1,6 +1,6 @@
 <template>
  <div class="">
-   {{ msg }}
+   <div v-for="(item, index) in 100" :key="index">{{ msg }}</div>
  </div>
 </template>
 

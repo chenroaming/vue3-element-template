@@ -5,6 +5,7 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 const name = 'vue3 ElementPlus Template'
+const apiPath = 'http://api.fund.eastmoney.com'
 module.exports = {
   publicPath: '/',
   assetsDir: 'static',
@@ -19,6 +20,15 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
+    },
+    proxy: {
+      '/api': {
+        target: apiPath,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
     }
   },
   configureWebpack: {

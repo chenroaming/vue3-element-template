@@ -5,11 +5,11 @@
 import { generate } from '@/libs/axios'
 const config = {
   items: [
-    // 加载广告位列表
+    // 加载列表数据
     {
       key: 'getList',
-      url: '/getList',
-      method: 'post',
+      url: '/f10/lsjz',
+      method: 'get',
       showTips: true
     }
   ]

@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { getToken, getUserType } from '@/utils/auth'
 import { omit } from 'lodash'
 let showTips = false
 const CONTENT_TYPES = {
@@ -11,7 +10,7 @@ const CONTENT_TYPES = {
   3: 'application/x-www-form-urlencoded'
 }
 const $router = useRouter()
-const store = useStore()
+// const store = useStore()
 // // create an axios instance
 const service = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
@@ -30,8 +29,7 @@ service.interceptors.request.use(
     if (config.method === 'post') {
       if (!(config.data instanceof FormData)) { // formData的情况单独处理
         config.data = {
-          ...config.data,
-          userType: getUserType()
+          ...config.data
         }
       }
     }
@@ -41,13 +39,6 @@ service.interceptors.request.use(
     }
     config.headers['x-tenant-id'] = 0
     config.headers['x-app-id'] = 1040
-    // do something before request is sent
-    if ((store.getters && store.getters.token) || getToken()) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers.Authorization = 'Bearer ' + getToken()
-    }
     return config
   },
   error => {

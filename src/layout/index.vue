@@ -8,7 +8,11 @@
           <BreadCrumb></BreadCrumb>
         </div>
         <TabsItem></TabsItem>
-        <router-view/>
+        <el-scrollbar class="scrollbar-wrapper">
+          <div class="app-main-section">
+            <router-view/>
+          </div>
+        </el-scrollbar>
       </div>
     </div>
   </div>
@@ -52,6 +56,11 @@ export default {
         padding: 0 10px;
         height: 50px;
         box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+      }
+      &-section {
+        width: 100%;
+        padding: 10px;
+        padding-bottom: 100px;
       }
     }
   }
