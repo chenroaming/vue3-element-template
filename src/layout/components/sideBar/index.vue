@@ -12,7 +12,7 @@
         active-text-color="#409EFF">
         <sideItem
           v-for="item in filterRouter"
-          :key="item.meta.title"
+          :key="item.path"
           :item="item"></sideItem>
       </el-menu>
     </el-scrollbar>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, watch, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import sideItem from './sideItem'
@@ -36,6 +36,15 @@ export default defineComponent({
     const $route = useRoute()
     const isCollapse = computed(() => store.getters['app/isCollapse'])
     const filterRouter = computed(() => store.getters['app/secondMenus'])
+    const nowActive = ref('')
+    const setNowActive = () => {
+      nowActive.value = $route.path
+    }
+    setNowActive()
+    watch($route, async (cur) => {
+      await nextTick()
+      setNowActive()
+    })
     // const nowActive = ref('')
     // const setNowActive = () => {
     //   const [head] = matched
@@ -48,9 +57,6 @@ export default defineComponent({
     // const setSecondMenusActive = () => {
     //   nowActive.value = path
     // }
-    const nowActive = computed(() => {
-      return $route.path
-    })
     // setNowActive()
     // setSecondMenusActive()
     return {

@@ -1,5 +1,5 @@
 <template>
- <el-submenu :index="item.path" v-if="hasChildNode">
+ <el-sub-menu :index="item.path" v-if="hasChildNode">
     <template v-slot:title>
       <i :class="item.meta.icon"></i>
       <span>{{ item.meta.title }}</span>
@@ -17,7 +17,7 @@
         :key="child.name"
         :index="child.path">{{ child.meta.title }}</el-menu-item>
     </el-menu-item-group>
-  </el-submenu>
+  </el-sub-menu>
   <el-menu-item :index="item.path" v-else>
     <i :class="item.meta.icon"></i>
     <template v-slot:title>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 export default defineComponent({
   name: 'slideItem',
   props: {
