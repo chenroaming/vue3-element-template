@@ -1,5 +1,13 @@
 <template>
- <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
+  <el-dropdown placement="bottom-end">
+    <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item>个人信息</el-dropdown-item>
+        <el-dropdown-item>注销</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
 </template>
 
 <script>
