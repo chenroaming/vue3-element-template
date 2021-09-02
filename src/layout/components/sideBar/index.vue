@@ -41,7 +41,7 @@ export default defineComponent({
       nowActive.value = $route.path
     }
     setNowActive()
-    watch($route, async (cur) => {
+    watch($route, async () => {
       await nextTick()
       setNowActive()
     })
