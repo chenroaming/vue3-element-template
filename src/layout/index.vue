@@ -6,6 +6,7 @@
       <div class="app-main">
         <div class="app-main-header">
           <BreadCrumb></BreadCrumb>
+          <Avatar></Avatar>
         </div>
         <TabsItem></TabsItem>
         <el-scrollbar class="scrollbar-wrapper">
@@ -23,13 +24,15 @@ import NavBar from './components/nav'
 import SideBar from './components/sideBar'
 import TabsItem from './components/tabsItem'
 import BreadCrumb from './components/breadCrumb'
+import Avatar from './components/avatar'
 export default {
   name: 'Layout',
   components: {
     NavBar,
     SideBar,
     TabsItem,
-    BreadCrumb
+    BreadCrumb,
+    Avatar
   },
   setup () {
 
@@ -52,6 +55,7 @@ export default {
       height: calc(100vh - 60px);
       &-header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: 0 10px;
         height: 50px;

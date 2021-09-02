@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { last } from 'lodash'
-export default {
+export default defineComponent({
   setup () {
     const $router = useRoute()
     const { dispatch } = useStore()
@@ -38,5 +38,5 @@ export default {
       menuList
     }
   }
-}
+})
 </script>
