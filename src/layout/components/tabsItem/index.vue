@@ -2,7 +2,7 @@
   <div class="tabs">
     <el-button type="text" @click="collaspse">{{ status }}</el-button>
     <div class="tabs-container" ref="container">
-      <div class="tabs-container-inner" :style="{ left: dynamicLeft }">
+      <div class="tabs-container-inner" ref="inner" :style="{ left: dynamicLeft + 'px' }">
         <el-tag
           class="tabs-container-item"
           v-for="(item, i) in tabsMenus"
@@ -13,8 +13,7 @@
           @close="handleClose(item.path)"
           :closable="closable"
           size="mini"
-          >{{ item.meta.title }}</el-tag
-        >
+          >{{ item.meta.title }}</el-tag>
       </div>
     </div>
   </div>
@@ -22,7 +21,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import { computed, ref, onBeforeUpdate } from 'vue'
+import { computed, ref, onBeforeUpdate, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { last } from 'lodash'
 export default {
@@ -34,6 +33,7 @@ export default {
       dispatch('app/changeCollapse')
     }
     const container = ref(null)
+    const inner = ref(null)
     const tags = ref([])
     const dynamicLeft = ref(0)
     const tabsMenus = computed(() => {
@@ -48,11 +48,7 @@ export default {
     const isChoise = itemPath => {
       return itemPath === $route.path ? 'dark' : 'plain'
     }
-    const handleClick = (itemPath, index) => {
-      dynamicLeft.value -= tags.value[index].$el.clientWidth
-      console.log(countWidth(index), container.value.clientWidth)
-      $router.replace(itemPath)
-    }
+
     const handleClose = itemPath => {
       commit('app/subTabsMenus', itemPath)
       if (itemPath === $route.path) {
@@ -60,13 +56,38 @@ export default {
         $router.replace(path)
       }
     }
-    const countWidth = (i) => {
+    const moveTabs = (index) => {
+      const containerWidth = container.value.clientWidth // 外部盒子的长度
+      // 计算当前点击的tab及该tab之前的总长度与偏移值之和是否大于可视区域
+      if (countTotalWidth(index) + dynamicLeft.value >= containerWidth) {
+        dynamicLeft.value -= countWidth(index) + 50
+      }
+      // 计算当前点击的tab与父容器偏移值与偏移值之和是否小于本标签长度
+      if (tags.value[index].$el.offsetLeft + dynamicLeft.value < countWidth(index)) {
+        dynamicLeft.value += countWidth(index) - 10
+      }
+    }
+    // 计算当前点击的tabs标签的总长度
+    const countTotalWidth = (i) => {
       const curArr = tags.value.slice(0, i + 1)
       const totalWidth = curArr.reduce((acc, cur) => {
-        return acc + cur.$el.clientWidth
+        return acc + cur.$el.clientWidth + 22
       }, 0)
       return totalWidth
     }
+    // 计算当前点击的tabs标签的长度
+    const countWidth = (i) => {
+      const width = tags.value[i].$el.clientWidth
+      return width
+    }
+    const handleClick = (itemPath, index) => {
+      moveTabs(index)
+      $router.replace(itemPath)
+    }
+    watch($route, cur => {
+      const index = tabsMenus.value.findIndex(item => item.path === cur.path)
+      index ?? moveTabs(index)
+    })
     // 确保在每次更新之前重置ref，源自官方文档写法
     onBeforeUpdate(() => {
       tags.value = []
@@ -80,6 +101,7 @@ export default {
       handleClose,
       closable,
       container,
+      inner,
       tags,
       dynamicLeft
     }
@@ -110,6 +132,7 @@ export default {
       display: flex;
       align-items: center;
       position: relative;
+      transition: left .3s;
     }
   }
 }

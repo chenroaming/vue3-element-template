@@ -39,6 +39,33 @@ export default {
             roles: ['admin']
           },
           name: 'child6-1-2'
+        },
+        {
+          path: '/menu6/index/child3',
+          component: () => import('@/views/menu6/child1/child2'),
+          meta: {
+            title: '菜单六第三级菜单3',
+            roles: ['admin']
+          },
+          name: 'child6-1-3'
+        },
+        {
+          path: '/menu6/index/child4',
+          component: () => import('@/views/menu6/child1/child2'),
+          meta: {
+            title: '菜单六第三级菜单4',
+            roles: ['admin']
+          },
+          name: 'child6-1-4'
+        },
+        {
+          path: '/menu6/index/child5',
+          component: () => import('@/views/menu6/child1/child2'),
+          meta: {
+            title: '菜单六第三级菜单5',
+            roles: ['admin']
+          },
+          name: 'child6-1-5'
         }
       ]
     }

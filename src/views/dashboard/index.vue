@@ -1,6 +1,9 @@
 <template>
  <div class="">
-   <div v-for="(item, index) in 100" :key="index">{{ msg }}</div>
+   <div>
+     <el-button @click="add">add</el-button>
+   </div>
+   <div v-for="(item, index) in count" :key="index">{{ msg }}</div>
  </div>
 </template>
 
@@ -10,8 +13,14 @@ export default {
   name: 'Home',
   setup () {
     const msg = ref('首页')
+    const count = ref(10)
+    const add = () => {
+      count.value++
+    }
     return {
-      msg
+      msg,
+      count,
+      add
     }
   }
 }
