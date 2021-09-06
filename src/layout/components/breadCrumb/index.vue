@@ -31,7 +31,6 @@ export default defineComponent({
     }
     getBreadCrumb($router.matched)
     watch($router, (cur) => {
-      dispatch('app/addTabsMenus', last(cur.matched))
       getBreadCrumb(cur.matched)
     })
     return {
