@@ -1,6 +1,8 @@
 <template>
   <div class="tabs">
-    <el-button type="text" @click="collaspse">{{ status }}</el-button>
+    <el-icon style="cursor: pointer;" :size="size" color="#000" @click="collaspse">
+      <Fold />
+    </el-icon>
     <div class="tabs-container" ref="container">
       <el-icon
         style="cursor: pointer;z-index:99;background: #fff;"
@@ -49,11 +51,12 @@ import { useStore } from 'vuex'
 import { computed, ref, onBeforeUpdate, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { last } from 'lodash'
-import { ArrowLeft, ArrowRight } from '@element-plus/icons'
+import { ArrowLeft, ArrowRight, Fold } from '@element-plus/icons'
 export default {
   components: {
     ArrowLeft,
-    ArrowRight
+    ArrowRight,
+    Fold
   },
   setup () {
     const size = ref(20)
@@ -73,7 +76,12 @@ export default {
       const containerWidth = container.value.clientWidth // 外部盒子的长度
       const innerWidth = inner.value.clientWidth // 内部盒子的长度
       if (type === 'right' && innerWidth < containerWidth) return false
-      if (type === 'right' && innerWidth - containerWidth < -dynamicLeft.value) { return false }
+      if (
+        type === 'right' &&
+        innerWidth - containerWidth < -dynamicLeft.value
+      ) {
+        return false
+      }
       type === 'left' && (dynamicLeft.value += 30)
       type === 'right' && (dynamicLeft.value -= 30)
     }

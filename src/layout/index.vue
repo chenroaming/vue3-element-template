@@ -47,7 +47,9 @@ export default {
     height: 100%;
     overflow: hidden;
     .main {
-      width: calc(100% - 200px);
+      width: 100%;
+      max-width: calc(100% - 63px);
+      min-width: calc(100% - 200px);
       height: 100vh;
     }
     .app-main {

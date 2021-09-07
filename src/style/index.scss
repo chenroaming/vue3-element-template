@@ -19,3 +19,8 @@
 .el-menu--collapse {
   height: 100vh;
 }
+
+// 修饰菜单组件样式
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  border: none;
+}
