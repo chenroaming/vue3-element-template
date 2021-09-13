@@ -11,6 +11,12 @@ const config = {
       url: '/f10/lsjz',
       method: 'get',
       showTips: true
+    },
+    {
+      key: 'login',
+      url: '/vue3-element-template/user/login',
+      method: 'post',
+      showTips: true
     }
   ]
 }

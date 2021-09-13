@@ -34,6 +34,7 @@
 <script>
 import { ref, reactive } from 'vue'
 import { Lock, UserFilled } from '@element-plus/icons'
+import { demo } from '@/api'
 export default {
   name: 'Login',
   components: {
@@ -50,10 +51,13 @@ export default {
     })
     const handleSubmit = () => {
       isLoading.value = true
-      loginForm.value.validate(valid => {
+      loginForm.value.validate(async valid => {
         isLoading.value = false
-        console.log(valid)
         if (!valid) return false
+        const res = await demo.login({
+          ...form
+        })
+        console.log(res)
       })
     }
     return {
