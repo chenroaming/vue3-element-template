@@ -16,7 +16,7 @@ const service = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   // baseURL: process.env.VUE_APP_BASE_API,
-  baseURL: process.env.VUE_APP_TEST_API,
+  baseURL: process.env.VUE_APP_BASE_API,
   // baseURL: process.env === 'production' ? process.env.VUE_APP_BASE_API : process.env.VUE_APP_TEST_API,
   // 超时，注意！axios的超时是中断请求，即canceled，非timeout，具体参见http://www.axios-js.com/zh-cn/docs/#axios-create-config
   timeout: 50000
