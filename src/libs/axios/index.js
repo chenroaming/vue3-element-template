@@ -64,7 +64,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code === 0) {
+    if (res.code === 20000) {
       showTips && ElMessage({
         message: res.message,
         type: 'success',
@@ -72,8 +72,7 @@ service.interceptors.response.use(
       })
       showTips = false
       return res
-    }
-    if (res.code !== 0) {
+    } else {
       ElMessage({
         message: `错误信息：${res.message}`,
         type: 'error',

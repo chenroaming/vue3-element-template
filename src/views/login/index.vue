@@ -35,6 +35,8 @@
 import { ref, reactive } from 'vue'
 import { Lock, UserFilled } from '@element-plus/icons'
 import { demo } from '@/api'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Login',
   components: {
@@ -42,6 +44,8 @@ export default {
     UserFilled
   },
   setup () {
+    const { dispatch } = useStore()
+    const { push } = useRouter()
     const isLoading = ref(false)
     const form = reactive({ userName: '', pwd: '' })
     const loginForm = ref(null)
@@ -57,7 +61,10 @@ export default {
         const res = await demo.login({
           ...form
         })
-        console.log(res)
+        if (res.code === 20000) {
+          dispatch('user/setLogin', res.data.token)
+          push('/dashboard')
+        }
       })
     }
     return {

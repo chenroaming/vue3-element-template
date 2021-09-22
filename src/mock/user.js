@@ -1,6 +1,7 @@
 const tokens = {
   admin: {
-    token: 'admin-token'
+    token: 'admin-token',
+    password: 'admin123'
   },
   editor: {
     token: 'editor-token'
@@ -22,18 +23,20 @@ module.exports = [
     url: '/vue3-element-template/user/login',
     type: 'post',
     response: config => {
-      const { username } = config.body
-      const token = tokens[username]
+      const { userName, pwd } = config.body
+      const token = tokens[userName]
+      const password = tokens[userName]
       // mock error
-      if (!token) {
+      if (!token || !password || pwd !== password.password) {
         return {
           code: 60204,
-          message: 'Account and password are incorrect.'
+          message: '账户名或密码错误'
         }
       }
 
       return {
         code: 20000,
+        message: '登录成功',
         data: token
       }
     }
