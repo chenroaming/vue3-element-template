@@ -5,18 +5,19 @@
 import { generate } from '@/libs/axios'
 const config = {
   items: [
-    // 加载列表数据
-    {
-      key: 'getList',
-      url: '/f10/lsjz',
-      method: 'get',
-      showTips: true
-    },
+    // 登录接口
     {
       key: 'login',
       url: '/vue3-element-template/user/login',
       method: 'post',
       showTips: true
+    },
+    // 获取用户角色接口
+    {
+      key: 'getRoles',
+      url: '/vue3-element-template/user/getRoles',
+      method: 'get',
+      showTips: false
     }
   ]
 }

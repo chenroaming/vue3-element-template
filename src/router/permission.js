@@ -2,22 +2,27 @@ import router from './index'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { get } from 'js-cookie'
-// NProgress.configure({ showSpinner: false }) // NProgress Configuration
+import store from '../store'
 // 白名单路径
 const whiteList = ['/login']
-
 router.beforeEach(async (to, from, next) => {
   // console.log('ROUTER.BEFORE_EACH>>>>>>>>>>', to, from, next)
   // 开始加载显示进度条
   NProgress.start()
   const hasToken = get('vue3-element-template-token')
   const { path } = to
+  const hasRoles = store.getters['user/roles'].length > 0
   if (hasToken) {
     // 有token并且前往的路径为登录页时，直接跳转至主页
-    if (path === '/login') {
-      next('/dashboard')
+    if (hasRoles) {
+      if (path === '/login') {
+        next('/dashboard')
+      } else {
+      // 有token并且前往的非登录页，则跳转至相应页面
+        next()
+      }
     } else {
-    // 有token并且前往的非登录页，则跳转至相应页面
+      await store.dispatch('user/getRoles')
       next()
     }
   } else {

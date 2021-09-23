@@ -1,9 +1,15 @@
 import { set, remove } from 'js-cookie'
-const user = {
+import { user } from '@/api'
+import { asyncRoutes } from '@/router'
+const filterRoutes = (routes, roles) => {
+  routes.filter(el => el.meta.roles)
+}
+const users = {
   namespaced: true,
   state: () => ({
     isLogin: false,
-    token: ''
+    token: '',
+    roles: []
   }),
   mutations: {
     setLogin (state, status) {
@@ -11,6 +17,9 @@ const user = {
     },
     setToken (state, token) {
       state.token = token
+    },
+    setRoles (state, roles) {
+      state.roles = roles
     }
   },
   actions: {
@@ -21,6 +30,9 @@ const user = {
       // 设置登录token的cookie，有效期可自定义
       set('vue3-element-template-token', token, { expires: 3 })
     },
+    setRoles ({ commit }, roles) {
+      commit('setRoles', roles)
+    },
     logout ({ commit }) {
       // 设置登录状态为false
       commit('setLogin', false)
@@ -28,11 +40,22 @@ const user = {
       commit('setToken', '')
       remove('vue3-element-template-token')
       location.reload()
+    },
+    getRoles ({ commit }) {
+      return new Promise((resolve, reject) => {
+        user.getRoles().then(res => {
+          commit('setRoles', res.data)
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
+      })
     }
   },
   getters: {
-    isLogin: state => state.isLogin
+    isLogin: state => state.isLogin,
+    roles: state => state.roles
   }
 }
 
-export default user
+export default users

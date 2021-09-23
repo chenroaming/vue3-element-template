@@ -34,7 +34,7 @@
 <script>
 import { ref, reactive } from 'vue'
 import { Lock, UserFilled } from '@element-plus/icons'
-import { demo } from '@/api'
+import { user } from '@/api'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
@@ -57,7 +57,7 @@ export default {
       loginForm.value.validate(async valid => {
         if (!valid) return false
         isLoading.value = true
-        const res = await demo.login({
+        const res = await user.login({
           ...form
         })
         isLoading.value = false
