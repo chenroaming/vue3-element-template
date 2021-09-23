@@ -28,10 +28,10 @@ const app = {
       commit('setCollapse')
     },
     setSecondMenus: ({ state, commit }, [path]) => {
-      const { children } = toRaw(state.asyncRouter).find(item => {
+      const secondMenus = toRaw(state.asyncRouter).find(item => {
         return item.path === path
       })
-      commit('setSecondMenus', children)
+      secondMenus && commit('setSecondMenus', secondMenus.children)
     },
     addTabsMenus ({ state, commit }, menu) {
       const hasMenu = state.tabsMenus.some(item => item.path === menu.path)

@@ -1,3 +1,5 @@
+// commonJS中，不能将import和module.exports混用，需用require和module.exports搭配使用
+const { get } = require('js-cookie')
 const tokens = {
   admin: {
     token: 'admin-token',
@@ -74,6 +76,21 @@ module.exports = [
       return {
         code: 20000,
         data: 'success'
+      }
+    }
+  },
+
+  // user roles
+  {
+    url: '/vue3-element-template/user/getRoles',
+    type: 'get',
+    response: () => {
+      const token = get('vue3-element-template-token')
+      const { roles } = users[token]
+      return {
+        code: 20000,
+        data: roles,
+        message: '获取成功'
       }
     }
   }

@@ -35,7 +35,7 @@ export default {
       component: () => import('@/views/menu5/child2'),
       meta: {
         title: '菜单五子菜单3',
-        roles: ['admin1']
+        roles: ['admin']
       },
       name: 'child5-3'
     }

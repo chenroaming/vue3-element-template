@@ -13,15 +13,19 @@ router.beforeEach(async (to, from, next) => {
   const hasToken = get('vue3-element-template-token')
   const { path } = to
   if (hasToken) {
-    if (path === 'login') {
+    // 有token并且前往的路径为登录页时，直接跳转至主页
+    if (path === '/login') {
       next('/dashboard')
     } else {
+    // 有token并且前往的非登录页，则跳转至相应页面
       next()
     }
   } else {
+    // 无token，但在白名单内，则直接跳转
     if (whiteList.includes(path)) {
       next()
     } else {
+    // 无token，不在白名单内，跳转至登录页
       next('/login')
     }
   }
