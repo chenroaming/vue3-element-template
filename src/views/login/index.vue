@@ -54,13 +54,13 @@ export default {
       pwd: [{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]
     })
     const handleSubmit = () => {
-      isLoading.value = true
       loginForm.value.validate(async valid => {
-        isLoading.value = false
         if (!valid) return false
+        isLoading.value = true
         const res = await demo.login({
           ...form
         })
+        isLoading.value = false
         if (res.code === 20000) {
           dispatch('user/setLogin', res.data.token)
           push('/dashboard')
