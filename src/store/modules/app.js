@@ -1,10 +1,10 @@
-import { asyncRoutes } from '@/router'
 import { toRaw } from 'vue'
+
 const app = {
   namespaced: true,
   state: () => ({
     isCollapse: false,
-    asyncRouter: asyncRoutes,
+    asyncRouter: [],
     secondMenus: [],
     tabsMenus: [],
     avatar: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg'
@@ -12,6 +12,9 @@ const app = {
   mutations: {
     setCollapse (state) {
       state.isCollapse = !state.isCollapse
+    },
+    setAsyncRoutes (state, routes) {
+      state.asyncRouter = routes
     },
     setSecondMenus (state, secMenus) {
       state.secondMenus = secMenus

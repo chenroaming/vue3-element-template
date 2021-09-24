@@ -8,13 +8,10 @@
         <img class="pic-404__child right" src="@/assets/404_images/404_cloud.png" alt="404">
       </div>
       <div class="bullshit">
-        <div class="bullshit__oops">OOPS!</div>
-        <div class="bullshit__info">All rights reserved
-          <a style="color:#20a0ff" href="https://wallstreetcn.com" target="_blank">wallstreetcn</a>
-        </div>
-        <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">Please check that the URL you entered is correct, or click the button below to return to the homepage.</div>
-        <a href="" class="bullshit__return-home">Back to home</a>
+        <div class="bullshit__oops">注意!</div>
+        <div class="bullshit__headline">还有{{ message }}秒后跳转回主页</div>
+        <div class="bullshit__info">请检查你输入的地址是否正确，倒计时结束后将自动跳回主页，或者直接点击下方按钮返回主页。</div>
+        <a href="" class="bullshit__return-home">返回主页</a>
       </div>
     </div>
   </div>
@@ -22,12 +19,21 @@
 
 <script>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Page404',
   setup () {
-    const counter = ref(0)
+    const { replace } = useRouter()
+    const counter = ref(10)
+    const interval = setInterval(() => {
+      counter.value--
+      if (counter.value <= 0) {
+        clearInterval(interval)
+        replace('/')
+      }
+    }, 1000)
     const message = computed(() => {
-      return counter.value + 1
+      return counter.value
     })
     return {
       counter,
@@ -166,6 +172,7 @@ export default {
     width: 300px;
     padding: 30px 0;
     overflow: hidden;
+    text-align: center;
     &__oops {
       font-size: 32px;
       font-weight: bold;
@@ -201,8 +208,7 @@ export default {
       animation-fill-mode: forwards;
     }
     &__return-home {
-      display: block;
-      float: left;
+      display: inline-block;
       width: 110px;
       height: 36px;
       background: #1482f0;

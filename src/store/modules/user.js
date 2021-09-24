@@ -1,11 +1,10 @@
 import { set, remove } from 'js-cookie'
 import { user } from '@/api'
-import { asyncRoutes } from '@/router'
+import asyncRoutes from '@/router/asyncRoutes'
 const hasPermission = (route, roles) => {
   return route.meta.roles.some(el => roles.includes(el)) || route.meta.roles.includes('any')
 }
 const filterRoutes = (routes, roles) => {
-  console.log(routes)
   const asyncRoutes = routes.filter(el => {
     if (el.children && el.children.length > 0) {
       el.children = filterRoutes(el.children, roles)

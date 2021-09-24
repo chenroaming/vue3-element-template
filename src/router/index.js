@@ -1,12 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import home from './modules/home'
-import menu1 from './modules/menu1'
-import menu2 from './modules/menu2'
-import menu3 from './modules/menu3'
-import menu4 from './modules/menu4'
-import menu5 from './modules/menu5'
-import menu6 from './modules/menu6'
 
+// 默认的固定路由，这里暂时就包括登录页和not Found页
 export const constantRoutes = [
   {
     path: '/login',
@@ -26,25 +20,6 @@ export const constantRoutes = [
   }
 ]
 
-export const asyncRoutes = [
-  home,
-  menu1,
-  menu2,
-  menu3,
-  menu4,
-  menu5,
-  menu6,
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'not-found',
-    component: () => import('@/views/404'),
-    meta: {
-      title: 'NoFound',
-      roles: ['any']
-    },
-    hide: true
-  }
-]
 const router = createRouter({
   history: createWebHashHistory(),
   routes: constantRoutes
