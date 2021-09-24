@@ -1,6 +1,7 @@
 <template>
  <div class="">
  {{title}}
+ <div>只有超级管理员账号才能看到这个页面</div>
  <router-view />
  </div>
 </template>

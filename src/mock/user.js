@@ -1,12 +1,14 @@
 // commonJS中，不能将import和module.exports混用，需用require和module.exports搭配使用
 const { get } = require('js-cookie')
 const tokens = {
+  // 用户名和密码
   admin: {
     token: 'admin-token',
     password: 'admin123'
   },
   editor: {
-    token: 'editor-token'
+    token: 'editor-token',
+    password: 'editor123'
   }
 }
 
@@ -16,6 +18,12 @@ const users = {
     introduction: 'I am a super administrator',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '超级管理员'
+  },
+  'editor-token': {
+    roles: ['editor'],
+    introduction: 'I am a editor',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    name: '编辑者'
   }
 }
 

@@ -8,7 +8,7 @@ export default {
   meta: {
     title: '菜单一',
     icon: 'el-icon-location',
-    roles: ['admin']
+    roles: ['admin', 'editor']
   },
   isCollapse: false,
   children: [
@@ -17,7 +17,7 @@ export default {
       component: () => import('@/views/menu1'),
       meta: {
         title: '菜单一',
-        roles: ['admin']
+        roles: ['admin', 'editor']
       },
       name: 'child1-1'
     }

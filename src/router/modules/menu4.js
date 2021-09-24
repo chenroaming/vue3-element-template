@@ -7,7 +7,7 @@ export default {
   meta: {
     title: '菜单四',
     icon: 'el-icon-picture-outline-round',
-    roles: ['admin']
+    roles: ['admin', 'editor']
   },
   redirect: '/menu4/index',
   isCollapse: false,
@@ -17,7 +17,7 @@ export default {
       component: () => import('@/views/menu4'),
       meta: {
         title: '菜单四子菜单1',
-        roles: ['admin']
+        roles: ['admin', 'editor']
       },
       name: 'child4-1'
     }
