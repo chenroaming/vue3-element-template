@@ -22,7 +22,10 @@ router.beforeEach(async (to, from, next) => {
         next()
       }
     } else {
-      await store.dispatch('user/getRoles')
+      const asyncRoutes = await store.dispatch('user/getRoles')
+      asyncRoutes.forEach(item => {
+        router.addRoute(item)
+      })
       next()
     }
   } else {

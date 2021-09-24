@@ -1,8 +1,18 @@
 import { set, remove } from 'js-cookie'
 import { user } from '@/api'
 import { asyncRoutes } from '@/router'
+const hasPermission = (route, roles) => {
+  return route.meta.roles.some(el => roles.includes(el)) || route.meta.roles.includes('any')
+}
 const filterRoutes = (routes, roles) => {
-  routes.filter(el => el.meta.roles)
+  console.log(routes)
+  const asyncRoutes = routes.filter(el => {
+    if (el.children && el.children.length > 0) {
+      el.children = filterRoutes(el.children, roles)
+    }
+    return hasPermission(el, roles)
+  })
+  return asyncRoutes
 }
 const users = {
   namespaced: true,
@@ -45,7 +55,8 @@ const users = {
       return new Promise((resolve, reject) => {
         user.getRoles().then(res => {
           commit('setRoles', res.data)
-          resolve()
+          const asyncRoute = filterRoutes(asyncRoutes, res.data)
+          resolve(asyncRoute)
         }).catch(err => {
           reject(err)
         })
