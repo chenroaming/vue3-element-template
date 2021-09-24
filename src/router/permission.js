@@ -26,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
       asyncRoutes.forEach(item => {
         router.addRoute(item)
       })
-      next()
+      next({ path, replace: true })
     }
   } else {
     // 无token，但在白名单内，则直接跳转
