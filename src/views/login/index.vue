@@ -59,8 +59,7 @@ export default {
         isLoading.value = true
         const res = await user.login({
           ...form
-        })
-        isLoading.value = false
+        }).finally(() => { isLoading.value = false })
         if (res.code === 20000) {
           dispatch('user/setLogin', res.data.token)
           push('/dashboard')

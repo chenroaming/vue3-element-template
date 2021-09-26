@@ -17,7 +17,8 @@ export default {
       component: () => import('@/views/menu5'),
       meta: {
         title: '菜单五子菜单1',
-        roles: ['admin']
+        roles: ['admin'],
+        icon: 'el-icon-menu'
       },
       name: 'child5-1'
     },
@@ -26,7 +27,8 @@ export default {
       component: () => import('@/views/menu5/child1'),
       meta: {
         title: '菜单五子菜单2',
-        roles: ['admin']
+        roles: ['admin'],
+        icon: 'el-icon-menu'
       },
       name: 'child5-2'
     },
@@ -35,7 +37,8 @@ export default {
       component: () => import('@/views/menu5/child2'),
       meta: {
         title: '菜单五子菜单3',
-        roles: ['admin']
+        roles: ['admin'],
+        icon: 'el-icon-menu'
       },
       name: 'child5-3'
     }

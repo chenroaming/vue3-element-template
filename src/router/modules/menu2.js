@@ -17,7 +17,8 @@ export default {
       component: () => import('@/views/menu2'),
       meta: {
         title: '菜单二',
-        roles: ['admin', 'editor']
+        roles: ['admin', 'editor'],
+        icon: 'el-icon-menu'
       },
       name: 'child2-1'
     }

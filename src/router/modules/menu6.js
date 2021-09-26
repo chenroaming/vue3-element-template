@@ -17,7 +17,8 @@ export default {
       component: () => import('@/views/menu6/child1/index'),
       meta: {
         title: '菜单六子菜单1',
-        roles: ['admin']
+        roles: ['admin'],
+        icon: 'el-icon-menu'
       },
       isCollapse: true,
       name: 'child6-1',
@@ -27,7 +28,8 @@ export default {
           component: () => import('@/views/menu6/child1/child1'),
           meta: {
             title: '菜单六第三级菜单1',
-            roles: ['admin']
+            roles: ['admin'],
+            icon: 'el-icon-menu'
           },
           name: 'child6-1-1'
         },
@@ -36,7 +38,8 @@ export default {
           component: () => import('@/views/menu6/child1/child2'),
           meta: {
             title: '菜单六第三级菜单2',
-            roles: ['admin']
+            roles: ['admin'],
+            icon: 'el-icon-menu'
           },
           name: 'child6-1-2'
         },
@@ -45,7 +48,8 @@ export default {
           component: () => import('@/views/menu6/child1/child2'),
           meta: {
             title: '菜单六第三级菜单3',
-            roles: ['admin']
+            roles: ['admin'],
+            icon: 'el-icon-menu'
           },
           name: 'child6-1-3'
         },
@@ -54,7 +58,8 @@ export default {
           component: () => import('@/views/menu6/child1/child2'),
           meta: {
             title: '菜单六第三级菜单4',
-            roles: ['admin']
+            roles: ['admin'],
+            icon: 'el-icon-menu'
           },
           name: 'child6-1-4'
         },
@@ -63,7 +68,8 @@ export default {
           component: () => import('@/views/menu6/child1/child2'),
           meta: {
             title: '菜单六第三级菜单5',
-            roles: ['admin']
+            roles: ['admin'],
+            icon: 'el-icon-menu'
           },
           name: 'child6-1-5'
         }

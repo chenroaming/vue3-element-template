@@ -11,7 +11,7 @@ export default {
       path: '/dashboard',
       name: 'Dashboard1',
       component: () => import('@/views/dashboard'),
-      meta: { title: '首页', roles: ['admin', 'editor'] }
+      meta: { title: '首页', roles: ['admin', 'editor'], icon: 'el-icon-menu' }
     }
   ]
 }

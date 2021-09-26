@@ -1,6 +1,6 @@
 <template>
  <el-sub-menu :index="item.path" v-if="hasChildNode">
-    <template v-slot:title>
+    <template #title>
       <i :class="item.meta.icon"></i>
       <span>{{ item.meta.title }}</span>
     </template>
@@ -19,8 +19,7 @@
     </el-menu-item-group>
   </el-sub-menu>
   <el-menu-item :index="item.path" v-else>
-    <i :class="item.meta.icon"></i>
-    <template v-slot:title>
+    <template #title>
       <span>{{ item.meta.title }}</span>
     </template>
   </el-menu-item>
