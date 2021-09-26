@@ -48,7 +48,7 @@ const app = {
       return state.isCollapse
     },
     asyncRouter: state => {
-      return state.asyncRouter.filter(item => !item.hide)
+      return state.asyncRouter.filter(item => !item.meta.hide)
     },
     secondMenus: state => {
       return state.secondMenus
