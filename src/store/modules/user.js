@@ -2,9 +2,11 @@ import { set, remove } from 'js-cookie'
 import { user } from '@/api'
 import asyncRoutes from '@/router/asyncRoutes'
 const hasPermission = (route, roles) => {
+  // 判断单个路由中的角色是否包含在角色列表中，或者为any即所有角色均可访问
   return route.meta.roles.some(el => roles.includes(el)) || route.meta.roles.includes('any')
 }
 const filterRoutes = (routes, roles) => {
+  // 递归过滤出具备权限的菜单
   const asyncRoutes = routes.filter(el => {
     if (el.children && el.children.length > 0) {
       el.children = filterRoutes(el.children, roles)

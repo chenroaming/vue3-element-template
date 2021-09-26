@@ -86,7 +86,8 @@ export default {
       type === 'right' && (dynamicLeft.value -= 30)
     }
     const tabsMenus = computed(() => {
-      return state.app.tabsMenus
+      // hide属性表示该路由需隐藏
+      return state.app.tabsMenus.filter(item => !item.meta.hide)
     })
     const status = computed(() => {
       return getters['app/isCollapse'] ? '展开' : '收起'
@@ -178,6 +179,8 @@ export default {
       }
     }
     watch($route, async cur => {
+      // 当检测到接下去要跳转的页面的hide为true时，说明该页面不需要添加入标签栏
+      if (cur.matched.every(item => item.meta.hide)) return
       await dispatch('app/addTabsMenus', last(cur.matched))
       const index = tabsMenus.value.findIndex(item => item.path === cur.path)
       moveTabs(index)

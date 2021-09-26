@@ -1,16 +1,13 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-// import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
 import { omit } from 'lodash'
+import $router from '@/router'
 let showTips = false
 const CONTENT_TYPES = {
   1: 'application/json',
   2: 'multipart/form-data',
   3: 'application/x-www-form-urlencoded'
 }
-const $router = useRouter()
-// const store = useStore()
 // // create an axios instance
 const service = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
@@ -84,8 +81,8 @@ service.interceptors.response.use(
     }
   },
   error => {
-    if (error.response.status === 401) { // 401为token失效，重定向到授权页
-      $router.push({ path: '/login', query: {} })
+    if (error.response.status === 401) { // 401为token失效，重定向到登录页
+      $router.replace({ path: '/login', query: {} })
       return
     }
     showTips = false
