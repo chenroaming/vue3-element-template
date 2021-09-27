@@ -1,17 +1,19 @@
-/*fade-transform*/
-.fade-transform-leave-active,
-.fade-transform-enter-active {
-  transition: all .5s;
+/*slide-transform*/
+// 过渡组件，使用方法参见：
+// https://v3.cn.vuejs.org/guide/transitions-enterleave.html#%E8%BF%87%E6%B8%A1class
+.slide-transform-enter-active,
+.slide-transform-leave-active {
+  transition: all 0.5s ease;
 }
 
-.fade-transform-enter {
+.slide-transform-enter-from {
   opacity: 0;
-  transform: translateX(-30px);
+	transform: translateX(-20px);
 }
 
-.fade-transform-leave-to {
+.slide-transform-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+	transform: translateX(20px);
 }
 
 /*fade*/

@@ -1,6 +1,6 @@
 <template>
  <el-breadcrumb separator="/">
-    <transition-group name="breadcrumb" mode="out-in">
+    <transition-group appear name="breadcrumb" mode="out-in">
       <el-breadcrumb-item
         v-for="item in menuList"
         :key="item.path">{{ item.title }}</el-breadcrumb-item>
@@ -22,7 +22,7 @@ export default defineComponent({
       // const { meta: { title }, path } = menu
       const fullPath = menu.reduce((acc, cur) => {
         return acc.concat([{ title: cur.meta.title, path: cur.path }])
-      }, [{ title: '首页', path: '/' }])
+      }, [])
       // menuList.value = [{ title: '首页', path: '/' }].concat(
       //   [{ title, path }]
       // )

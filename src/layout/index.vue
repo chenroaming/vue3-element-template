@@ -11,7 +11,14 @@
         <TabsItem></TabsItem>
         <el-scrollbar class="scrollbar-wrapper">
           <div class="app-main-section">
-            <router-view/>
+            <router-view v-slot="{ Component }">
+              <!-- 这里为单个标签需要用transtion组件，如果使用transtion-group组件将不会有预期的效果 -->
+              <transition name="slide-transform" appear mode="out-in">
+                <!-- 要设置key，避免warning -->
+                <!-- 参见：https://v3.cn.vuejs.org/api/built-in-components.html#transition-group -->
+                <component :is="Component" :key="nowActive" />
+              </transition>
+            </router-view>
           </div>
         </el-scrollbar>
       </div>
@@ -25,6 +32,8 @@ import SideBar from './components/sideBar'
 import TabsItem from './components/tabsItem'
 import BreadCrumb from './components/breadCrumb'
 import Avatar from './components/avatar'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
   name: 'Layout',
   components: {
@@ -35,7 +44,11 @@ export default {
     Avatar
   },
   setup () {
-
+    const { state } = useStore()
+    const nowActive = computed(() => state.app.nowActive)
+    return {
+      nowActive
+    }
   }
 }
 </script>

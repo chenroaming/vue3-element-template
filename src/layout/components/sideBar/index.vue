@@ -31,14 +31,15 @@ export default defineComponent({
     sideItem
   },
   setup () {
-    const store = useStore()
+    const { getters, commit } = useStore()
     // const { matched, path } = useRoute()
     const $route = useRoute()
-    const isCollapse = computed(() => store.getters['app/isCollapse'])
-    const filterRouter = computed(() => store.getters['app/secondMenus'])
+    const isCollapse = computed(() => getters['app/isCollapse'])
+    const filterRouter = computed(() => getters['app/secondMenus'])
     const nowActive = ref('')
     const setNowActive = () => {
       nowActive.value = $route.path
+      commit('app/setNowActive', $route.path)
     }
     setNowActive()
     watch($route, async () => {
