@@ -9,7 +9,7 @@ export default {
   children: [
     {
       path: '/dashboard',
-      name: 'Dashboard1',
+      name: 'Home',
       component: () => import('@/views/dashboard'),
       meta: { title: '主页面', roles: ['admin', 'editor'], icon: 'el-icon-menu' }
     }

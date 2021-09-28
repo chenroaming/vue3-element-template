@@ -20,7 +20,7 @@ export default {
         roles: ['admin', 'editor'],
         icon: 'el-icon-menu'
       },
-      name: 'child4-1'
+      name: 'menu4_child1'
     }
   ]
 }

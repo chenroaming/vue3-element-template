@@ -20,7 +20,7 @@ export default {
         roles: ['admin', 'editor'],
         icon: 'el-icon-menu'
       },
-      name: 'child3-1'
+      name: 'menu3_child1'
     },
     {
       path: '/menu3/child2',
@@ -30,7 +30,7 @@ export default {
         roles: ['admin', 'editor'],
         icon: 'el-icon-menu'
       },
-      name: 'child3-2'
+      name: 'menu3_child2'
     }
   ]
 }

@@ -7,6 +7,7 @@
 <script>
 import { ref } from 'vue'
 export default {
+  name: 'menu2_child1',
   setup () {
     const title = ref('菜单二')
     return {

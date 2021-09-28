@@ -8,12 +8,12 @@
 
 .slide-transform-enter-from {
   opacity: 0;
-	transform: translateX(-20px);
+	transform: translateX(-30px);
 }
 
 .slide-transform-leave-to {
   opacity: 0;
-	transform: translateX(20px);
+	transform: translateX(30px);
 }
 
 /*fade*/

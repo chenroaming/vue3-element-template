@@ -9,6 +9,7 @@
 import { ref } from 'vue'
 import { demo } from '@/api'
 export default {
+  name: 'menu1_child1',
   setup () {
     const title = ref('菜单一')
     const getList = async () => {

@@ -1,9 +1,9 @@
 <template>
  <div class="">
    <div>
-     <el-button @click="add">add</el-button>
+     <el-button @click="add">点击添加行数</el-button>
    </div>
-   <div v-for="(item, index) in count" :key="index">{{ msg }}</div>
+   <div v-for="(item, index) in count" :key="index">{{ msg }}{{ index }}</div>
  </div>
 </template>
 
@@ -12,7 +12,7 @@ import { ref } from 'vue'
 export default {
   name: 'Home',
   setup () {
-    const msg = ref('首页')
+    const msg = ref('测试keepAlive效果')
     const count = ref(10)
     const add = () => {
       count.value++

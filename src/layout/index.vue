@@ -16,7 +16,9 @@
               <transition name="slide-transform" appear mode="out-in">
                 <!-- 要设置key，避免warning -->
                 <!-- 参见：https://v3.cn.vuejs.org/api/built-in-components.html#transition-group -->
-                <component :is="Component" :key="nowActive" />
+                <keep-alive :include="keepAliveList" :max="5">
+                  <component :is="Component" :key="nowActive" />
+                </keep-alive>
               </transition>
             </router-view>
           </div>
@@ -46,8 +48,10 @@ export default {
   setup () {
     const { state } = useStore()
     const nowActive = computed(() => state.app.nowActive)
+    const keepAliveList = computed(() => state.app.tabsMenus.map(item => item.name))
     return {
-      nowActive
+      nowActive,
+      keepAliveList
     }
   }
 }
