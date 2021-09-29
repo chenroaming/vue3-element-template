@@ -27,7 +27,8 @@ export default defineComponent({
   name: 'NavBar',
   setup () {
     const store = useStore()
-    const noShow = true
+    // 本地存储取出来为string格式，需用JSON.parse转换一下
+    const noShow = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav'))
     const $route = useRoute()
     const nowActive = computed(() => {
       const [{ path }] = $route.matched
@@ -35,8 +36,8 @@ export default defineComponent({
     })
     store.dispatch('app/setSecondMenus', [nowActive.value])
     const firstMenu = computed(() => store.getters['app/asyncRouter'])
-    const handleSelect = (key, keyPath, item) => {
-      store.dispatch('app/setSecondMenus', keyPath)
+    const handleSelect = (...arg) => {
+      store.dispatch('app/setSecondMenus', arg[1])
     }
     watch($route, ({ matched: [{ path }] }) => {
       handleSelect('', [path])

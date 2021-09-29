@@ -24,7 +24,7 @@ import { defineComponent, computed, ref, watch, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import sideItem from './sideItem'
-// import { last } from 'lodash'
+import { last } from 'lodash'
 export default defineComponent({
   name: 'sideBar',
   components: {
@@ -32,34 +32,37 @@ export default defineComponent({
   },
   setup () {
     const { getters, commit } = useStore()
-    // const { matched, path } = useRoute()
     const $route = useRoute()
+    // 本地存储取出来为string格式，需用JSON.parse转换一下
+    const hasTopNav = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav'))
+    // 判断是否需要顶部菜单栏从而获取不同的菜单数据源
+    const filterRouter = hasTopNav ? computed(() => getters['app/secondMenus']) : getters['app/asyncRouter']
+    // const { matched, path } = useRoute()
     const isCollapse = computed(() => getters['app/isCollapse'])
-    const filterRouter = computed(() => getters['app/secondMenus'])
     const nowActive = ref('')
-    const setNowActive = () => {
+    // 当顶部菜单栏为一级菜单时执行该函数设置当前菜单高亮
+    const hasTopNavSetNowActive = () => {
       nowActive.value = $route.path
+      // 将当前高亮的地址同步至store中，使得顶部菜单栏能同步高亮点击的菜单
       commit('app/setNowActive', $route.path)
+    }
+    // 当只有侧边菜单栏时执行该函数设置当前菜单高亮
+    const noTopNavSetNowActive = () => {
+      const [head] = $route.matched
+      if (head.children.length < 2 && $route.matched.length < 3) {
+        nowActive.value = head.path
+        return
+      }
+      nowActive.value = last($route.matched).path
+    }
+    const setNowActive = () => {
+      hasTopNav ? hasTopNavSetNowActive() : noTopNavSetNowActive()
     }
     setNowActive()
     watch($route, async () => {
       await nextTick()
       setNowActive()
     })
-    // const nowActive = ref('')
-    // const setNowActive = () => {
-    //   const [head] = matched
-    //   if (head.children.length < 2 && matched.length < 3) {
-    //     nowActive.value = head.path
-    //     return
-    //   }
-    //   nowActive.value = last(matched).path
-    // }
-    // const setSecondMenusActive = () => {
-    //   nowActive.value = path
-    // }
-    // setNowActive()
-    // setSecondMenusActive()
     return {
       isCollapse,
       filterRouter,

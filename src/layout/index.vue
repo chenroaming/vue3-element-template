@@ -16,8 +16,9 @@
               <transition name="slide-transform" appear mode="out-in">
                 <!-- 要设置key，避免warning -->
                 <!-- 参见：https://v3.cn.vuejs.org/api/built-in-components.html#transition-group -->
+                <!-- keep-alive中的component组件需要添加key，避免报错parentComponent.ctx.deactivate is not a function -->
                 <keep-alive :include="keepAliveList" :max="5">
-                  <component :is="Component" :key="nowActive" />
+                  <component :is="Component" :key="route.path" />
                 </keep-alive>
               </transition>
             </router-view>
@@ -36,6 +37,7 @@ import BreadCrumb from './components/breadCrumb'
 import Avatar from './components/avatar'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 export default {
   name: 'Layout',
   components: {
@@ -47,10 +49,10 @@ export default {
   },
   setup () {
     const { state } = useStore()
-    const nowActive = computed(() => state.app.nowActive)
+    const route = useRoute()
     const keepAliveList = computed(() => state.app.tabsMenus.map(item => item.name))
     return {
-      nowActive,
+      route,
       keepAliveList
     }
   }
