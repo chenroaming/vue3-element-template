@@ -88,12 +88,10 @@ export default defineComponent({
 <style scoped lang = "scss">
   .aside {
     height: 100vh;
-    /* background: #304156; */
   }
   .logo {
     width: 100%;
     height: 60px;
-    /* background: #304156; */
     line-height: 60px;
     text-align: center;
     color: #fff;
