@@ -1,0 +1,26 @@
+@import './transtion.scss';
+
+.el-scrollbar {
+  position: relative;
+}
+
+.el-scrollbar__wrap {
+  overflow-x: hidden!important;
+}
+
+.scrollbar {
+  height: calc( 100vh - 215px);
+}
+
+.dashboard-container {
+  overflow: hidden;
+}
+
+.el-menu--collapse {
+  height: 100vh;
+}
+
+// 修饰菜单组件样式
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  border: none;
+}

@@ -1,0 +1,37 @@
+/*slide-transform*/
+// 过渡组件，使用方法参见：
+// https://v3.cn.vuejs.org/guide/transitions-enterleave.html#%E8%BF%87%E6%B8%A1class
+.slide-transform-enter-active,
+.slide-transform-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-transform-enter-from {
+  opacity: 0;
+	transform: translateX(-30px);
+}
+
+.slide-transform-leave-to {
+  opacity: 0;
+	transform: translateX(30px);
+}
+
+/*fade*/
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all .5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-move {
+  transition: all .5s;
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
+}
