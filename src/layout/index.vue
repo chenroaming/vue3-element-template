@@ -1,14 +1,19 @@
 <template>
   <div class="m-page">
-    <SideBar></SideBar>
+    <SideBar />
     <div class="main">
-      <NavBar></NavBar>
+      <NavBar />
       <div class="app-main">
         <div class="app-main-header">
-          <BreadCrumb></BreadCrumb>
-          <Avatar></Avatar>
+          <div>
+            <BreadCrumb />
+          </div>
+          <div class="app-main-header-sec">
+            <Theme />
+            <Avatar />
+          </div>
         </div>
-        <TabsItem></TabsItem>
+        <TabsItem />
         <el-scrollbar class="scrollbar-wrapper">
           <div class="app-main-section">
             <router-view v-slot="{ Component }">
@@ -35,6 +40,7 @@ import SideBar from './components/sideBar'
 import TabsItem from './components/tabsItem'
 import BreadCrumb from './components/breadCrumb'
 import Avatar from './components/avatar'
+import Theme from './components/theme'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
@@ -45,7 +51,8 @@ export default {
     SideBar,
     TabsItem,
     BreadCrumb,
-    Avatar
+    Avatar,
+    Theme
   },
   setup () {
     const { state } = useStore()
@@ -81,6 +88,9 @@ export default {
         padding: 0 10px;
         height: 50px;
         box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+        &-sec {
+          display: flex;
+        }
       }
       &-section {
         width: 100%;

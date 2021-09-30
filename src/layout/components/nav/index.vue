@@ -5,9 +5,9 @@
       @select="handleSelect"
       class="el-menu-demo"
       mode="horizontal"
-      background-color="#304156"
-      text-color="#fff"
-      active-text-color="#409EFF"
+      :background-color="theme.menuBg"
+      :text-color="theme.fontColor"
+      :active-text-color="theme.activeColor"
     >
       <el-menu-item
         v-for="item in firstMenu"
@@ -34,6 +34,7 @@ export default defineComponent({
       const [{ path }] = $route.matched
       return path
     })
+    const theme = computed(() => store.getters['app/appTheme'])
     store.dispatch('app/setSecondMenus', [nowActive.value])
     const firstMenu = computed(() => store.getters['app/asyncRouter'])
     const handleSelect = (...arg) => {
@@ -46,7 +47,8 @@ export default defineComponent({
       noShow,
       nowActive,
       handleSelect,
-      firstMenu
+      firstMenu,
+      theme
     }
   }
 })

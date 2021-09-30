@@ -1,15 +1,15 @@
 <template>
-  <div class="aside">
-    <div class="logo">Logo</div>
+  <div class="aside" :style="{ background: theme.menuBg }">
+    <div class="logo" :style="{ background: theme.menuBg }">Logo</div>
     <el-scrollbar class="scrollbar-wrapper">
       <el-menu
         router
         :default-active="nowActive"
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
-        background-color="#304156"
-        text-color="#fff"
-        active-text-color="#409EFF">
+        :background-color="theme.menuBg"
+        :text-color="theme.fontColor"
+        :active-text-color="theme.activeColor">
         <sideItem
           v-for="item in filterRouter"
           :key="item.path"
@@ -40,6 +40,7 @@ export default defineComponent({
     // const { matched, path } = useRoute()
     const isCollapse = computed(() => getters['app/isCollapse'])
     const nowActive = ref('')
+    const theme = computed(() => getters['app/appTheme'])
     // 当顶部菜单栏为一级菜单时执行该函数设置当前菜单高亮
     const hasTopNavSetNowActive = () => {
       nowActive.value = $route.path
@@ -66,7 +67,8 @@ export default defineComponent({
     return {
       isCollapse,
       filterRouter,
-      nowActive
+      nowActive,
+      theme
     }
   }
 })
@@ -86,12 +88,12 @@ export default defineComponent({
 <style scoped lang = "scss">
   .aside {
     height: 100vh;
-    background: #304156;
+    /* background: #304156; */
   }
   .logo {
     width: 100%;
     height: 60px;
-    background: #304156;
+    /* background: #304156; */
     line-height: 60px;
     text-align: center;
     color: #fff;

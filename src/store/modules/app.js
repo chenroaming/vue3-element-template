@@ -1,5 +1,5 @@
 import { toRaw } from 'vue'
-
+const theme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme'))
 const app = {
   namespaced: true,
   state: () => ({
@@ -8,7 +8,12 @@ const app = {
     secondMenus: [],
     tabsMenus: [],
     avatar: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-    nowActive: ''
+    nowActive: '',
+    theme: {
+      menuBg: theme?.menuBg ?? '#304156',
+      fontColor: theme?.fontColor ?? '#fff',
+      activeColor: theme?.activeColor ?? '#409EFF'
+    }
   }),
   mutations: {
     setCollapse (state) {
@@ -28,6 +33,9 @@ const app = {
     },
     setNowActive (state, path) {
       state.nowActive = path
+    },
+    setTheme (state, theme) {
+      state.theme = theme
     }
   },
   actions: {
@@ -50,7 +58,8 @@ const app = {
   getters: {
     isCollapse: state => state.isCollapse,
     asyncRouter: state => state.asyncRouter.filter(item => !item.meta.hide),
-    secondMenus: state => state.secondMenus
+    secondMenus: state => state.secondMenus,
+    appTheme: state => state.theme
   }
 }
 
