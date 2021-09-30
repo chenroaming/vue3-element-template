@@ -28,10 +28,10 @@ router.beforeEach(async to => {
     // 有token且有用户角色时且具备动态路由表，并且跳转路径非登录页，则前往目标页
     /* tips：每次在动态路由页面刷新时都会有一个vue-router的warning，提示没有匹配到路由，但是此时动态路由应该是同步添加完成了
       在静态路由，比如login页刷新不会有该warning，此后在动态路由跳转也不会出现该warning
-      该问题待解决，也烦请茫茫人海中的你如果能解决该warning，务必发pull request，感谢！
+      该问题待解决，也烦请茫茫人海中的你如果能看到并解决该问题的话，务必发pull request，感谢！
       PS:该warning并不影响功能
     */
-    return { path, replace: true }
+    return { ...to, replace: true }
   }
   // 无token，但在白名单内，则直接跳转，否则跳转至登录页
   return whiteList.includes(path) ? true : '/login'
