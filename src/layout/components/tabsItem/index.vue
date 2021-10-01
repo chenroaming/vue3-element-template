@@ -19,6 +19,7 @@
       >
         <el-tag
           class="tabs-container-item"
+          :style="{ margin: marginStyle }"
           v-for="(item, i) in tabsMenus"
           :key="item.name"
           :ref="
@@ -71,6 +72,8 @@ export default {
     const inner = ref(null)
     const tags = ref([])
     const dynamicLeft = ref(0)
+    const margin = 20
+    const marginStyle = `0px ${margin / 2}px`
     const move = type => {
       if (type === 'left' && dynamicLeft.value >= 0) return false
       const containerWidth = container.value.clientWidth // 外部盒子的长度
@@ -109,7 +112,7 @@ export default {
     const countTotalWidth = i => {
       const curArr = tags.value.slice(0, i + 1)
       const totalWidth = curArr.reduce((acc, cur) => {
-        return acc + cur.$el.clientWidth + 20
+        return acc + cur.$el.clientWidth + margin
       }, 0)
       return totalWidth
     }
@@ -157,7 +160,7 @@ export default {
         return
       }
       if (type === 'hideInRight') {
-        dynamicLeft.value -= diff + 20
+        dynamicLeft.value -= diff + margin
         return
       }
       // 计算当前点击的tab距离右边的距离是否小于下一个tab的距离
@@ -165,8 +168,8 @@ export default {
         containerWidth - (countTotalWidth(index) + dynamicLeft.value) <=
         countWidth(index + 1)
       ) {
-        // 计算该tag和下一个tag的长度之和，20是margin的宽度
-        dynamicLeft.value -= countWidth(index) + countWidth(index + 1) + 20
+        // 计算该tag和下一个tag的长度之和，常量margin是marginLeft和marginRight之和
+        dynamicLeft.value -= countWidth(index) + countWidth(index + 1) + margin
         return
       }
       // 计算当前点击的tab与父容器偏移值与偏移值之和是否小于本标签长度
@@ -174,8 +177,8 @@ export default {
         tags.value[index].$el.offsetLeft + dynamicLeft.value <
         countWidth(index)
       ) {
-        // 计算该tag和上一个tag的长度之和，20是margin的宽度
-        dynamicLeft.value += countWidth(index) + countWidth(index - 1) + 20
+        // 计算该tag和上一个tag的长度之和，常量margin是marginLeft和marginRight之和
+        dynamicLeft.value += countWidth(index) + countWidth(index - 1) + margin
       }
     }
     watch($route, async cur => {
@@ -186,6 +189,7 @@ export default {
       moveTabs(index)
     })
     // 确保在每次更新之前重置ref，源自官方文档写法
+    // 参见：https://v3.cn.vuejs.org/guide/migration/array-refs.html
     onBeforeUpdate(() => {
       tags.value = []
     })
@@ -203,7 +207,8 @@ export default {
       dynamicLeft,
       size,
       color,
-      move
+      move,
+      marginStyle
     }
   }
 }
@@ -225,7 +230,6 @@ export default {
     align-items: center;
     margin-left: 15px;
     &-item {
-      margin: 0 10px;
       cursor: pointer;
     }
     &-inner {
