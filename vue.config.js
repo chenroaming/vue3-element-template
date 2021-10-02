@@ -61,5 +61,9 @@ module.exports = {
         }
       }
     })
+    // 引入 ts/tsx 文件时不必加后缀
+    config.resolve.extensions
+      .add('ts')
+      .add('tsx')
   }
 }
