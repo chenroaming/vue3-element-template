@@ -5,9 +5,9 @@
  </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
   name: 'menu3_child1',
   setup () {
     const title = ref('这是菜单3子菜单1')
@@ -15,7 +15,7 @@ export default {
       title
     }
   }
-}
+})
 </script>
 
 <style scoped lang = "scss">

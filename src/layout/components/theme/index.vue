@@ -21,10 +21,10 @@
   </div>
 </template>
 
-<script>
-import { reactive } from 'vue'
+<script lang="ts">
+import { defineComponent, reactive } from 'vue'
 import { useStore } from 'vuex'
-export default {
+export default defineComponent({
   name: 'theme',
   setup () {
     const { commit } = useStore()
@@ -43,7 +43,7 @@ export default {
       handleChange
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

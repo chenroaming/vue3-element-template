@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'

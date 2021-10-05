@@ -5,10 +5,10 @@
  </div>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { demo } from '@/api'
-export default {
+export default defineComponent({
   name: 'menu1_child1',
   setup () {
     const title = ref('菜单一')
@@ -24,7 +24,7 @@ export default {
       getList
     }
   }
-}
+})
 </script>
 
 <style scoped lang = "scss">

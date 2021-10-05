@@ -34,17 +34,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import NavBar from './components/nav'
 import SideBar from './components/sideBar'
 import TabsItem from './components/tabsItem'
 import BreadCrumb from './components/breadCrumb'
 import Avatar from './components/avatar'
 import Theme from './components/theme'
-import { computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-export default {
+export default defineComponent({
   name: 'Layout',
   components: {
     NavBar,
@@ -63,7 +63,7 @@ export default {
       keepAliveList
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

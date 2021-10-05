@@ -8,7 +8,7 @@
   </el-breadcrumb>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'

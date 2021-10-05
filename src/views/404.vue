@@ -17,10 +17,10 @@
   </div>
 </template>
 
-<script>
-import { ref, computed } from 'vue'
+<script lang="ts">
+import { defineComponent, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-export default {
+export default defineComponent({
   name: 'Page404',
   setup () {
     const { replace } = useRouter()
@@ -40,7 +40,7 @@ export default {
       message
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

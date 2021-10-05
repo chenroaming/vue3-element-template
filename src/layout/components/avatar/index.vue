@@ -11,7 +11,7 @@
   </el-dropdown>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, reactive, computed, toRefs } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessageBox } from 'element-plus'

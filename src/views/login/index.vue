@@ -31,13 +31,13 @@
   </div>
 </template>
 
-<script>
-import { ref, reactive } from 'vue'
+<script lang="ts">
+import { ref, reactive, defineComponent } from 'vue'
 import { Lock, UserFilled } from '@element-plus/icons'
 import { user } from '@/api'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-export default {
+export default defineComponent({
   name: 'Login',
   components: {
     Lock,
@@ -74,7 +74,7 @@ export default {
       handleSubmit
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

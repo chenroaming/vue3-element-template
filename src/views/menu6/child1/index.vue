@@ -6,16 +6,16 @@
  </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
   setup () {
     const title = ref('这是菜单6')
     return {
       title
     }
   }
-}
+})
 </script>
 
 <style scoped lang = "scss">

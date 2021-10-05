@@ -47,13 +47,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useStore } from 'vuex'
-import { computed, ref, onBeforeUpdate, watch } from 'vue'
+import { defineComponent, computed, ref, onBeforeUpdate, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { last } from 'lodash'
 import { ArrowLeft, ArrowRight, Fold } from '@element-plus/icons'
-export default {
+export default defineComponent({
   components: {
     ArrowLeft,
     ArrowRight,
@@ -211,7 +211,7 @@ export default {
       marginStyle
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">
