@@ -1,16 +1,18 @@
-const Mock = require('mockjs')
-const { param2Obj } = require('./utils')
-
-const user = require('./user')
-
-const mocks = [
+import Mock from 'mockjs'
+import param2Obj from './utils'
+import user from './user'
+const mocks:Array<any> = [
   ...user
 ]
-
+interface options {
+  body: string
+  type: string
+  url: string
+}
 // for front mock
 // please use it cautiously, it will redefine XMLHttpRequest,
 // which will cause many of your third-party libraries to be invalidated(like progress event).
-function mockXHR () {
+export function mockXHR ():void {
   // mock patch
   // https://github.com/nuysoft/Mock/issues/300
   Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
@@ -25,8 +27,8 @@ function mockXHR () {
     this.proxy_send(...arguments)
   }
 
-  function XHR2ExpressReqWrap (respond) {
-    return function (options) {
+  function XHR2ExpressReqWrap (respond:any) {
+    return function (options:options) {
       let result = null
       if (respond instanceof Function) {
         const { body, type, url } = options
@@ -46,9 +48,4 @@ function mockXHR () {
   for (const i of mocks) {
     Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
   }
-}
-
-module.exports = {
-  mocks,
-  mockXHR
 }

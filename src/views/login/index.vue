@@ -46,15 +46,15 @@ export default defineComponent({
   setup () {
     const { dispatch } = useStore()
     const { push } = useRouter()
-    const isLoading = ref(false)
+    const isLoading = ref<boolean>(false)
     const form = reactive({ userName: '', pwd: '' })
-    const loginForm = ref(null)
+    const loginForm = ref<any>(null)
     const rules = ref({
       userName: [{ required: true, message: '请输入用户名', trigger: ['blur', 'change'] }],
       pwd: [{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]
     })
-    const handleSubmit = () => {
-      loginForm.value.validate(async valid => {
+    const handleSubmit = ():void => {
+      loginForm.value.validate(async (valid:boolean) => {
         if (!valid) return false
         isLoading.value = true
         const res = await user.login({

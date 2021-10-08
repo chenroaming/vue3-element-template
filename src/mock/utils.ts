@@ -1,13 +1,16 @@
+interface objRules {
+  [name: string]: string
+}
 /**
  * @param {string} url
  * @returns {Object}
  */
-function param2Obj (url) {
+function param2Obj (url:string):objRules {
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
   if (!search) {
     return {}
   }
-  const obj = {}
+  const obj = {} as objRules
   const searchArr = search.split('&')
   searchArr.forEach(v => {
     const index = v.indexOf('=')
@@ -20,6 +23,4 @@ function param2Obj (url) {
   return obj
 }
 
-module.exports = {
-  param2Obj
-}
+export default param2Obj

@@ -1,5 +1,20 @@
 // commonJS中，不能将import和module.exports混用，需用require和module.exports搭配使用
-const { get } = require('js-cookie')
+import { get } from 'js-cookie'
+interface config {
+  body: any
+  query: any
+}
+interface tokens {
+  [userName:string]: any
+}
+interface users {
+  [token:string]: any
+}
+interface res {
+  code: number
+  message?: string
+  data?: string
+}
 const tokens = {
   // 用户名和密码
   admin: {
@@ -10,7 +25,7 @@ const tokens = {
     token: 'editor-token',
     password: 'editor123'
   }
-}
+} as tokens
 
 const users = {
   'admin-token': {
@@ -25,14 +40,14 @@ const users = {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '编辑者'
   }
-}
+} as users
 
-module.exports = [
+const user:Array<any> = [
   // user login
   {
     url: '/vue3-element-template/user/login',
     type: 'post',
-    response: config => {
+    response: (config:config):any => {
       const { userName, pwd } = config.body
       const token = tokens[userName]
       const password = tokens[userName]
@@ -56,7 +71,7 @@ module.exports = [
   {
     url: '/vue3-element-template/user/info.*',
     type: 'get',
-    response: config => {
+    response: (config:config):any => {
       const { token } = config.query
       const info = users[token]
       console.log('config', config)
@@ -80,7 +95,7 @@ module.exports = [
   {
     url: '/vue3-element-template/user/logout',
     type: 'get',
-    response: () => {
+    response: ():res => {
       return {
         code: 20000,
         data: 'success'
@@ -92,7 +107,7 @@ module.exports = [
   {
     url: '/vue3-element-template/user/getRoles',
     type: 'get',
-    response: () => {
+    response: ():res => {
       const token = get('vue3-element-template-token')
       const { roles } = users[token]
       return {
@@ -103,3 +118,5 @@ module.exports = [
     }
   }
 ]
+
+export default user

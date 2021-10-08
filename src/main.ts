@@ -18,11 +18,12 @@ if (process.env.NODE_ENV === 'development') {
 // 创建vue3应用实例
 const app = createApp(App)
 
-// 引入vuex
-app.use(store)
 
-// 引入vue-router
-app.use(router)
+app
+  // 引入vuex
+  .use(store)
+  // 引入vue-router
+  .use(router)
 
 // 按需加载element组件
 installElementPlus(app)

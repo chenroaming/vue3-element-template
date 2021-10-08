@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 // 按需引入，这里是全部引入，如果有不需要引入的组件自行删除即可，可减少打包体积
 import {
   ElAlert,
@@ -85,7 +86,7 @@ import {
   ElNotification
 } from 'element-plus'
 
-export default app => {
+export default (app: App): void => {
   app.use(ElAlert)
   app.use(ElAside)
   app.use(ElAutocomplete)
