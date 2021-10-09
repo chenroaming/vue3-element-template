@@ -5,7 +5,8 @@ export const constantRoutes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login/index'),
+    // 这里的vue后缀需要写出来才能正确解析
+    component: ():any => import('@/views/login/index.vue'),
     hidden: true
   }
 ]

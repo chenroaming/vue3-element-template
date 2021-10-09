@@ -34,9 +34,18 @@
 <script lang="ts">
 import { ref, reactive, defineComponent } from 'vue'
 import { Lock, UserFilled } from '@element-plus/icons'
-import { user } from '@/api'
+import api from '@/api/index.ts'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+interface rules {
+  userName: Array<any>
+  pwd: Array<any>
+}
+interface res {
+  code: number
+  message: string
+  data: any
+}
 export default defineComponent({
   name: 'Login',
   components: {
@@ -44,12 +53,13 @@ export default defineComponent({
     UserFilled
   },
   setup () {
+    const { user } = api
     const { dispatch } = useStore()
     const { push } = useRouter()
     const isLoading = ref<boolean>(false)
     const form = reactive({ userName: '', pwd: '' })
     const loginForm = ref<any>(null)
-    const rules = ref({
+    const rules = ref<rules>({
       userName: [{ required: true, message: '请输入用户名', trigger: ['blur', 'change'] }],
       pwd: [{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]
     })
@@ -57,7 +67,7 @@ export default defineComponent({
       loginForm.value.validate(async (valid:boolean) => {
         if (!valid) return false
         isLoading.value = true
-        const res = await user.login({
+        const res:res = await user.login({
           ...form
         }).finally(() => { isLoading.value = false })
         if (res.code === 20000) {

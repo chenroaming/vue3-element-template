@@ -4,22 +4,21 @@
 // 定义可索引的类型
 // 参考：https://www.tslang.cn/docs/handbook/interfaces.html
 interface moduleRules {
-  [moduleName: string]: string
+  [moduleName: string]: any
 }
 // 不需要导入的文件
-const noImport = ['index']
+const noImport:Array<string> = ['index']
 // 请求api文件夹下所有文件
-const apiModels = require.context('../api/', false, /\.js$/)
+const apiModels = require.context('./', false, /\.ts$/)
 const modules = apiModels.keys().reduce((module: moduleRules, modulePath: string) => {
   // 解析文件名
-  const moduleName = modulePath.replace(/^.\/(.*)\.js/, '$1')
+  const moduleName: string = modulePath.replace(/^.\/(.*)\.ts/, '$1')
   const value = apiModels(modulePath)
   if (!noImport.includes(moduleName)) {
     module[moduleName] = value.default
   }
   return module
-}, {moduleName: ''})
-
-module.exports = {
+}, {})
+export default {
   ...modules
 }

@@ -18,7 +18,7 @@ export default defineComponent({
     const $router = useRoute()
     const { dispatch } = useStore()
     const menuList = ref([])
-    const getBreadCrumb = (menu) => {
+    const getBreadCrumb = (menu:Array<any>) => {
       // const { meta: { title }, path } = menu
       const fullPath = menu.reduce((acc, cur) => {
         return acc.concat([{ title: cur.meta.title, path: cur.path }])

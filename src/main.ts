@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './router/permission' // 引入路由控制
 import '@/style/index.scss' // 引入公共样式
-import store from './store'
+import store from './store/index.ts'
 // 按需引入element组件库
 import installElementPlus from './libs/element'
 import 'element-plus/dist/index.css'

@@ -1,9 +1,17 @@
+interface items {
+  key: string
+  url: string
+  method: string
+  showTips?: boolean
+}
+interface config {
+  items: Array<items>
+}
 /**
  * 示例接口
  */
-
-import { generate } from '@/libs/axios'
-const config = {
+import { generate } from '@/libs/axios/index.ts'
+const config:config = {
   items: [
     // 登录接口
     {

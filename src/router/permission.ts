@@ -2,17 +2,19 @@ import router from './index'
 import NProgress from 'nprogress' // 引入进度条
 import 'nprogress/nprogress.css' // 引入进度条样式
 import { get } from 'js-cookie'
-import store from '@/store'
+// 引入store路径需要详细指定具体文件夹
+import store from '@/store/index.ts'
 // 白名单路径
-const whiteList = ['/login']
+const whiteList:Array<string> = ['/login']
 // vue-router4.x不再推荐使用next()，推荐使用return的方式进行下一步导航操作
 // 参见：https://next.router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%8F%AF%E9%80%89%E7%9A%84%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0-next
 router.beforeEach(async to => {
   // 开始加载显示进度条
   NProgress.start()
-  const hasToken = get('vue3-element-template-token')
+  const hasToken:string = get('vue3-element-template-token')
   const { path } = to
-  const hasRoles = store.getters['user/roles'].length > 0
+  // 这里必须用可选链操作符判断后才能继续执行
+  const hasRoles:boolean = store.getters['user/roles']?.length > 0
   if (hasToken) {
     // 有token并且已获取动态路由，前往登录页时重定向到主页，否则继续前往目标页面
     if (hasRoles) return path === '/login' ? '/' : true
@@ -20,7 +22,7 @@ router.beforeEach(async to => {
     const asyncRoutes = await store.dispatch('user/getRoles')
     // 将处理好的异步路由保存至vuex
     store.commit('app/setAsyncRoutes', asyncRoutes)
-    asyncRoutes.forEach(item => {
+    asyncRoutes.forEach((item:any):void => {
       // vue-router4.x开始不再支持router.addRoutes，需要用addRoute一个个添加路由。
       // 参考：https://next.router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1
       router.addRoute(item)

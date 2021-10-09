@@ -28,7 +28,7 @@ export default defineComponent({
   setup () {
     const store = useStore()
     // 本地存储取出来为string格式，需用JSON.parse转换一下
-    const noShow = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav'))
+    const noShow:boolean = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav') || 'false')
     const $route = useRoute()
     const nowActive = computed(() => {
       const [{ path }] = $route.matched
@@ -37,7 +37,7 @@ export default defineComponent({
     const theme = computed(() => store.getters['app/appTheme'])
     store.dispatch('app/setSecondMenus', [nowActive.value])
     const firstMenu = computed(() => store.getters['app/asyncRouter'])
-    const handleSelect = (...arg) => {
+    const handleSelect = (...arg:any) => {
       store.dispatch('app/setSecondMenus', arg[1])
     }
     watch($route, ({ matched: [{ path }] }) => {

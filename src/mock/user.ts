@@ -47,7 +47,7 @@ const user:Array<any> = [
   {
     url: '/vue3-element-template/user/login',
     type: 'post',
-    response: (config:config):any => {
+    response: (config:config):res => {
       const { userName, pwd } = config.body
       const token = tokens[userName]
       const password = tokens[userName]
@@ -71,7 +71,7 @@ const user:Array<any> = [
   {
     url: '/vue3-element-template/user/info.*',
     type: 'get',
-    response: (config:config):any => {
+    response: (config:config):res => {
       const { token } = config.query
       const info = users[token]
       console.log('config', config)

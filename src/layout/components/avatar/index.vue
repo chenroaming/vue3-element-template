@@ -28,7 +28,7 @@ export default defineComponent({
     }
     const changeLayout = () => {
       // 本地存储取出来为string格式，需用JSON.parse转换一下
-      const needNav = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav'))
+      const needNav:boolean = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav') || 'false')
       const text = needNav ? '关闭' : '打开'
       ElMessageBox.confirm(
         `确认${text}顶部菜单栏布局吗？此操作将刷新页面`,
@@ -40,7 +40,7 @@ export default defineComponent({
         }
       )
         .then(() => {
-          window.localStorage.setItem('vue3-element-template-needTopNav', !needNav)
+          window.localStorage.setItem('vue3-element-template-needTopNav', JSON.stringify(!needNav))
           location.reload()
         })
         .catch(() => {})

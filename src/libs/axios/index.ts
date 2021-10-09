@@ -1,15 +1,15 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { omit } from 'lodash'
-import $router from '@/router'
+import $router from '@/router/index.ts'
 let showTips = false
-const CONTENT_TYPES = {
+const CONTENT_TYPES:any = {
   1: 'application/json',
   2: 'multipart/form-data',
   3: 'application/x-www-form-urlencoded'
 }
 // // create an axios instance
-const service = axios.create({
+const service:any = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   // baseURL: process.env.VUE_APP_BASE_API,
@@ -20,8 +20,27 @@ const service = axios.create({
 })
 // let config1 = {}
 // // request interceptor
+interface config {
+  showTips?: boolean
+  funds?: string
+  headers?: any
+  method?: string
+  data?: any
+}
+interface opts {
+  url: string
+  method: string
+  headers: any
+  showTips: boolean
+  params?: any
+  data?: any
+}
+interface options {
+  data?: any
+  cType?: string
+}
 service.interceptors.request.use(
-  config => {
+  (config:config) => {
     showTips = !!config.showTips
     if (config.method === 'post') {
       if (!(config.data instanceof FormData)) { // formData的情况单独处理
@@ -38,7 +57,7 @@ service.interceptors.request.use(
     config.headers['x-app-id'] = 1040
     return config
   },
-  error => {
+  (error:any) => {
     showTips = false
     // do something with request error
     ElMessage.error(error.message)
@@ -58,7 +77,7 @@ service.interceptors.response.use(
      * Here is just an example
      * You can also judge the status by HTTP Status Code
      */
-  response => {
+  (response:any) => {
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (res.code === 20000) {
@@ -80,7 +99,7 @@ service.interceptors.response.use(
       // return Promise.reject(new Error(res.message || 'Error'))
     }
   },
-  error => {
+  (error:any) => {
     if (error.response.status === 401) { // 401为token失效，重定向到登录页
       $router.replace({ path: '/login', query: {} })
       return
@@ -91,9 +110,9 @@ service.interceptors.response.use(
   }
 )
 
-export function ajax (method = 'post', url, options, showTips) {
+export function ajax (method = 'post', url: string, options: options, showTips: boolean): any {
   options.data = options.data || {}
-  const opts = {
+  const opts:opts = {
     url,
     method,
     headers: {
@@ -118,11 +137,11 @@ export function ajax (method = 'post', url, options, showTips) {
   return service(opts)
 }
 
-export function generate (config) {
-  const map = {}
+export function generate (config:any):any {
+  const map = {} as any
   const { items } = config
   for (let i = 0, len = items.length; i < len; i++) {
-    map[items[i].key] = function (data) {
+    map[items[i].key] = (data:any) => {
       return ajax(items[i].method, (items[i].prefix || config.prefix || '') + items[i].url, {
         data,
         ...(omit(items[i], ['key', 'url', 'method', 'prefix', 'params']) || {})
@@ -131,5 +150,3 @@ export function generate (config) {
   }
   return map
 }
-
-export default {}

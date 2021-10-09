@@ -1,5 +1,5 @@
 // 首页
-import Layout from '@/layout'
+import Layout from '@/layout/index.vue'
 export default {
   path: '/',
   component: Layout,
@@ -10,7 +10,7 @@ export default {
     {
       path: '/dashboard',
       name: 'Home',
-      component: () => import('@/views/dashboard'),
+      component: ():any => import('@/views/dashboard/index.vue'),
       meta: { title: '主页面', roles: ['admin', 'editor'], icon: 'el-icon-menu' }
     }
   ]

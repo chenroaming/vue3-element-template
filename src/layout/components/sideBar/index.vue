@@ -23,7 +23,7 @@
 import { defineComponent, computed, ref, watch, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import sideItem from './sideItem'
+import sideItem from './sideItem.vue'
 import { last } from 'lodash'
 export default defineComponent({
   name: 'sideBar',
@@ -32,14 +32,14 @@ export default defineComponent({
   },
   setup () {
     const { getters, commit } = useStore()
-    const $route = useRoute()
+    const $route:any = useRoute()
     // 本地存储取出来为string格式，需用JSON.parse转换一下
-    const hasTopNav = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav'))
+    const hasTopNav:boolean = JSON.parse(window.localStorage.getItem('vue3-element-template-needTopNav') || 'false')
     // 判断是否需要顶部菜单栏从而获取不同的菜单数据源
     const filterRouter = hasTopNav ? computed(() => getters['app/secondMenus']) : getters['app/asyncRouter']
     // const { matched, path } = useRoute()
     const isCollapse = computed(() => getters['app/isCollapse'])
-    const nowActive = ref('')
+    const nowActive = ref<string>('')
     const theme = computed(() => getters['app/appTheme'])
     // 当顶部菜单栏为一级菜单时执行该函数设置当前菜单高亮
     const hasTopNavSetNowActive = () => {

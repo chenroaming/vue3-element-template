@@ -1,8 +1,13 @@
 import { toRaw } from 'vue'
-const theme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme'))
+interface theme {
+  menuBg?: string
+  fontColor?: string
+  activeColor?: string
+}
+const theme:theme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme'))
 const app = {
   namespaced: true,
-  state: () => ({
+  state: ():any => ({
     isCollapse: false,
     asyncRouter: [],
     secondMenus: [],
@@ -16,50 +21,50 @@ const app = {
     }
   }),
   mutations: {
-    setCollapse (state) {
+    setCollapse (state:any):void {
       state.isCollapse = !state.isCollapse
     },
-    setAsyncRoutes (state, routes) {
+    setAsyncRoutes (state:any, routes:Array<any>):void {
       state.asyncRouter = routes
     },
-    setSecondMenus (state, secMenus) {
+    setSecondMenus (state:any, secMenus:Array<any>):void {
       state.secondMenus = secMenus
     },
-    addTabsMenus (state, menu) {
+    addTabsMenus (state:any, menu:Array<any>):void {
       state.tabsMenus.push(menu)
     },
-    subTabsMenus (state, path) {
-      state.tabsMenus = toRaw(state.tabsMenus).filter(item => item.path !== path)
+    subTabsMenus (state:any, path:string):void {
+      state.tabsMenus = toRaw(state.tabsMenus).filter((item:any) => item.path !== path)
     },
-    setNowActive (state, path) {
+    setNowActive (state:any, path:string):void {
       state.nowActive = path
     },
-    setTheme (state, theme) {
+    setTheme (state:any, theme:string):void {
       state.theme = theme
     }
   },
   actions: {
-    changeCollapse ({ commit }) {
+    changeCollapse ({ commit }:any):void {
       commit('setCollapse')
     },
-    setSecondMenus: ({ state, commit }, [path]) => {
-      const secondMenus = toRaw(state.asyncRouter).find(item => {
+    setSecondMenus: ({ state, commit }:any, [path]:Array<string>):void => {
+      const secondMenus = toRaw(state.asyncRouter).find((item:any):boolean => {
         return item.path === path
       })
       secondMenus && commit('setSecondMenus', secondMenus.children)
     },
-    addTabsMenus ({ state, commit }, menu) {
-      const hasMenu = state.tabsMenus.some(item => item.path === menu.path)
+    addTabsMenus ({ state, commit }:any, menu:any):void {
+      const hasMenu = state.tabsMenus.some((item:any) => item.path === menu.path)
       if (!hasMenu) {
         commit('addTabsMenus', menu)
       }
     }
   },
   getters: {
-    isCollapse: state => state.isCollapse,
-    asyncRouter: state => state.asyncRouter.filter(item => !item.meta.hide),
-    secondMenus: state => state.secondMenus,
-    appTheme: state => state.theme
+    isCollapse: (state:any) => state.isCollapse,
+    asyncRouter: (state:any) => state.asyncRouter.filter((item:any) => !item.meta.hide),
+    secondMenus: (state:any) => state.secondMenus,
+    appTheme: (state:any) => state.theme
   }
 }
 
