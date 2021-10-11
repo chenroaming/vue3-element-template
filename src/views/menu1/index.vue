@@ -7,10 +7,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { demo } from '@/api'
+import api from '@/api/index.ts'
 export default defineComponent({
   name: 'menu1_child1',
   setup () {
+    const { demo } = api
     const title = ref('菜单一')
     const getList = async () => {
       const res = await demo.getList({

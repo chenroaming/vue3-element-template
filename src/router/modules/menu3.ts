@@ -1,5 +1,5 @@
 // 示例菜单2
-import Layout from '@/layout'
+import Layout from '@/layout/index.vue'
 export default {
   path: '/menu3',
   component: Layout,
@@ -14,7 +14,7 @@ export default {
   children: [
     {
       path: '/menu3/child1',
-      component: () => import('@/views/menu3'),
+      component: ():any => import('@/views/menu3/index.vue'),
       meta: {
         title: '菜单三子菜单1',
         roles: ['admin', 'editor'],
@@ -24,7 +24,7 @@ export default {
     },
     {
       path: '/menu3/child2',
-      component: () => import('@/views/menu3/child'),
+      component: ():any => import('@/views/menu3/child.vue'),
       meta: {
         title: '菜单三子菜单2',
         roles: ['admin', 'editor'],

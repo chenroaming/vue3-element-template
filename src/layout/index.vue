@@ -35,15 +35,18 @@
 </template>
 
 <script lang="ts">
-import NavBar from './components/nav'
-import SideBar from './components/sideBar'
-import TabsItem from './components/tabsItem'
-import BreadCrumb from './components/breadCrumb'
-import Avatar from './components/avatar'
-import Theme from './components/theme'
+import NavBar from './components/nav/index.vue'
+import SideBar from './components/sideBar/index.vue'
+import TabsItem from './components/tabsItem/index.vue'
+import BreadCrumb from './components/breadCrumb/index.vue'
+import Avatar from './components/avatar/index.vue'
+import Theme from './components/theme/index.vue'
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
+interface item {
+  name?: string
+}
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -57,7 +60,7 @@ export default defineComponent({
   setup () {
     const { state } = useStore()
     const route = useRoute()
-    const keepAliveList = computed(() => state.app.tabsMenus.map(item => item.name))
+    const keepAliveList = computed(() => state.app.tabsMenus.map((item:item) => item.name))
     return {
       route,
       keepAliveList

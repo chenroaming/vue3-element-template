@@ -4,7 +4,7 @@ interface theme {
   fontColor?: string
   activeColor?: string
 }
-const theme:theme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme'))
+const theme:theme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme') || '')
 const app = {
   namespaced: true,
   state: ():any => ({

@@ -53,6 +53,10 @@ import { defineComponent, computed, ref, onBeforeUpdate, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { last } from 'lodash'
 import { ArrowLeft, ArrowRight, Fold } from '@element-plus/icons'
+interface diff {
+  type: string
+  diff: number
+}
 export default defineComponent({
   components: {
     ArrowLeft,
@@ -60,21 +64,21 @@ export default defineComponent({
     Fold
   },
   setup () {
-    const size = ref(20)
-    const color = ref('#aaa')
+    const size = ref<number>(20)
+    const color = ref<string>('#aaa')
     const { getters, state, dispatch, commit } = useStore()
     const $route = useRoute()
     const $router = useRouter()
-    const collaspse = () => {
+    const collaspse = ():void => {
       dispatch('app/changeCollapse')
     }
-    const container = ref(null)
-    const inner = ref(null)
-    const tags = ref([])
-    const dynamicLeft = ref(0)
+    const container = ref<any>(null)
+    const inner = ref<any>(null)
+    const tags = ref<Array<any>>([])
+    const dynamicLeft = ref<number>(0)
     const margin = 20
     const marginStyle = `0px ${margin / 2}px`
-    const move = type => {
+    const move = (type:string) => {
       if (type === 'left' && dynamicLeft.value >= 0) return false
       const containerWidth = container.value.clientWidth // 外部盒子的长度
       const innerWidth = inner.value.clientWidth // 内部盒子的长度
@@ -88,20 +92,20 @@ export default defineComponent({
       type === 'left' && (dynamicLeft.value += 30)
       type === 'right' && (dynamicLeft.value -= 30)
     }
-    const tabsMenus = computed(() => {
+    const tabsMenus = computed(():Array<any> => {
       // hide属性表示该路由需隐藏
-      return state.app.tabsMenus.filter(item => !item.meta.hide)
+      return state.app.tabsMenus.filter((item:any) => !item.meta.hide)
     })
-    const status = computed(() => {
+    const status = computed(():string => {
       return getters['app/isCollapse'] ? '展开' : '收起'
     })
-    const closable = computed(() => {
+    const closable = computed(():boolean => {
       return state.app.tabsMenus.length > 1
     })
-    const isChoise = itemPath => {
+    const isChoise = (itemPath:string):string => {
       return itemPath === $route.path ? 'dark' : 'plain'
     }
-    const handleClose = itemPath => {
+    const handleClose = (itemPath:string):void => {
       commit('app/subTabsMenus', itemPath)
       if (itemPath === $route.path) {
         const { path } = last(tabsMenus.value)
@@ -109,23 +113,23 @@ export default defineComponent({
       }
     }
     // 计算当前点击的tabs标签的总长度
-    const countTotalWidth = i => {
+    const countTotalWidth = (i:number):number => {
       const curArr = tags.value.slice(0, i + 1)
-      const totalWidth = curArr.reduce((acc, cur) => {
+      const totalWidth = curArr.reduce((acc, cur:any) => {
         return acc + cur.$el.clientWidth + margin
       }, 0)
       return totalWidth
     }
     // 计算当前点击的tabs标签的长度
-    const countWidth = i => {
+    const countWidth = (i:number):number => {
       const width = i < tags.value.length ? tags.value[i].$el.clientWidth : 0
       return width
     }
-    const handleClick = itemPath => {
+    const handleClick = (itemPath:string):void => {
       $router.replace(itemPath)
     }
     // 是否不在可视区域内
-    const isHide = index => {
+    const isHide = (index:number):diff => {
       // 判断是否在可视区域左侧
       if (-dynamicLeft.value > countTotalWidth(index)) {
         return {
@@ -151,7 +155,7 @@ export default defineComponent({
         diff: 0
       }
     }
-    const moveTabs = index => {
+    const moveTabs = (index:number):void => {
       const { type, diff } = isHide(index)
       const containerWidth = container.value.clientWidth // 外部盒子的长度
       // 当点击的是第一个或者第二个时，则直接将移动的距离置为0
@@ -185,7 +189,7 @@ export default defineComponent({
       // 当检测到接下去要跳转的页面的hide为true时，说明该页面不需要添加入标签栏
       if (cur.matched.every(item => item.meta.hide)) return
       await dispatch('app/addTabsMenus', last(cur.matched))
-      const index = tabsMenus.value.findIndex(item => item.path === cur.path)
+      const index = tabsMenus.value.findIndex((item:any) => item.path === cur.path)
       moveTabs(index)
     })
     // 确保在每次更新之前重置ref，源自官方文档写法

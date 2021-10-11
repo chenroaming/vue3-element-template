@@ -39,7 +39,7 @@ export default defineComponent({
     const filterRouter = hasTopNav ? computed(() => getters['app/secondMenus']) : getters['app/asyncRouter']
     // const { matched, path } = useRoute()
     const isCollapse = computed(() => getters['app/isCollapse'])
-    const nowActive = ref<string>('')
+    const nowActive = ref<string | undefined>('')
     const theme = computed(() => getters['app/appTheme'])
     // 当顶部菜单栏为一级菜单时执行该函数设置当前菜单高亮
     const hasTopNavSetNowActive = () => {
@@ -54,7 +54,7 @@ export default defineComponent({
         nowActive.value = head.path
         return
       }
-      nowActive.value = last($route.matched).path
+      nowActive.value = last($route.path)
     }
     const setNowActive = () => {
       hasTopNav ? hasTopNavSetNowActive() : noTopNavSetNowActive()

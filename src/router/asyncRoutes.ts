@@ -21,7 +21,7 @@ const asyncRoutes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('@/views/404'),
+    component: ():any => import('@/views/404.vue'),
     meta: {
       title: 'NoFound',
       roles: ['any'],

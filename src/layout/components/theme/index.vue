@@ -24,12 +24,17 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import { useStore } from 'vuex'
+interface theme {
+  menuBg?: string
+  fontColor?: string
+  activeColor?: string
+}
 export default defineComponent({
   name: 'theme',
   setup () {
     const { commit } = useStore()
-    const getTheme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme'))
-    const theme = reactive({
+    const getTheme = JSON.parse(window.localStorage.getItem('vue3-element-template-theme') || '')
+    const theme:theme = reactive({
       menuBg: getTheme?.menuBg ?? '#304156',
       fontColor: getTheme?.fontColor ?? '#fff',
       activeColor: getTheme?.activeColor ?? '#409EFF'
