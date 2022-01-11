@@ -32,6 +32,8 @@ npm run lint 或 yarn lint
 ### 脚手架配置参考
 参见： [Configuration Reference](https://cli.vuejs.org/config/).
 
+### 登录账号和密码
+采用mock配置，具体参见src/mock/user.js文件
 ### 项目特色
 
 * 项目基于vue3.x/element-plus组件库/vue-router4.x/vuex4.x/vue-cli4.x/axios等技术栈二次开发而来，非常感谢这些开源库的参与者和开源世界
